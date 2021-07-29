@@ -4,6 +4,7 @@ local Player = Actor:extend()
 
 function Player:new(_x, _y)
   Player.super.new(self, _x, _y, "assets/player.png")
+  self.strength = 10
 end
 
 local function getDirectionInput()

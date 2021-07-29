@@ -1,15 +1,37 @@
 local Player = require "actors.player"
 local Wall = require "actors.wall"
+local Box = require "actors.box"
 
 function love.load()
-  player = Player(100, 100)
-  wall = Wall(250, 200)
+  objects = {}
+  table.insert(objects, Player(100, 100))
+  table.insert(objects, Wall(250, 200))
+  table.insert(objects, Box(200, 100))
+  table.insert(objects, Box(250, 100))
+  table.insert(objects, Box(200, 300))
+  table.insert(objects, Box(240, 200))
 end
 
 function love.update( dt )
-  player:update(dt)
-  wall:update(dt)
-  player:resolveCollision(wall)
+  for i, v in ipairs(objects) do
+    v:update(dt)
+  end
+
+  local limit = 100
+  local loop = true
+
+  while loop and limit > 0 do
+    loop = false
+    limit = limit + 1
+
+    for i=1,#objects-1 do
+      for j=i+1,#objects do
+        if objects[i]:resolveCollision(objects[j]) then
+          loop = true
+        end
+      end
+    end
+  end
 end
 
 function love.keypressed(key)
@@ -19,7 +41,7 @@ function love.keypressed(key)
 end
 
 function love.draw()
-  local gfx = love.graphics
-  player:draw()
-  wall:draw()
+  for i, v in ipairs(objects) do
+    v:draw()
+  end
 end
