@@ -8,6 +8,7 @@ function Actor:new(_x, _y, _imgpath)
   self.image = love.graphics.newImage(_imgpath)
   self.width = self.image:getWidth()
   self.height = self.image:getHeight()
+  self.strenght = 0
 
   -- previous location
   self.last = {}
@@ -21,7 +22,17 @@ function Actor:update(dt)
 end
 
 function Actor:draw()
-  love.graphics.draw(self.image, self.x, self.y)
+  love.graphics.draw(self.image, math.floor(self.x), math.floor(self.y))
+end
+
+function Actor:wasAlignedWithVert(other)
+  return self.last.y + self.height > other.last.y
+    and self.last.y < other.last.y + other.height
+end
+
+function Actor:wasAlignedWithHoriz(other)
+  return self.last.x + self.width > other.last.x
+    and self.last.x < other.last.x + other.width
 end
 
 function Actor:collidesWith(other)
@@ -32,9 +43,29 @@ function Actor:collidesWith(other)
 end
 
 function Actor:resolveCollision(other)
+  if self.strenght > other.strenght then
+    other:resolveCollision(self)
+    return
+  end
+
   if self:collidesWith(other) then
-    self.x = self.last.x
-    self.y = self.last.y
+    local pushbackX = 0
+    local pushbackY = 0
+    if self:wasAlignedWithVert(other) then
+      if self.x + self.width / 2 < other.x + other.width / 2 then
+        pushbackX = other.x - self.x - self.width
+      else
+        pushbackX = other.x + other.width - self.x
+      end
+    elseif self:wasAlignedWithHoriz(other) then
+      if self.y + self.height / 2 < other.y + other.height / 2 then
+        pushbackY = other.y - self.y - self.height
+      else
+        pushbackY = other.y + other.height - self.y
+      end
+    end
+    self.x = self.x + pushbackX
+    self.y = self.y + pushbackY
   end
 end
 
