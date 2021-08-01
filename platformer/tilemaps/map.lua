@@ -8,8 +8,8 @@ return {
   height = 15,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 4,
-  nextobjectid = 1,
+  nextlayerid = 5,
+  nextobjectid = 4,
   properties = {},
   tilesets = {
     {
@@ -72,6 +72,35 @@ return {
         23, 23, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 16, 16, 16, 16, 16, 23, 23,
         23, 23, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 16, 16, 16, 16, 23, 23, 23, 23, 23, 23, 23, 23,
         23, 23, 23, 16, 16, 16, 16, 16, 16, 16, 16, 16, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 4,
+      name = "player",
+      visible = false,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      tintcolor = { 170, 0, 0 },
+      properties = {},
+      objects = {
+        {
+          id = 3,
+          name = "player",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 112,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
       }
     },
     {
