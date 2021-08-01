@@ -2,12 +2,13 @@ local Object = require("lib.classic")
 
 local Actor = Object:extend()
 
-function Actor:new(_x, _y, _imgpath)
+function Actor:new(_x, _y, _imgpath, _qx, _qy, _qw, _qh)
   self.x = _x
   self.y = _y
-  self.image = love.graphics.newImage(_imgpath)
-  self.width = self.image:getWidth()
-  self.height = self.image:getHeight()
+  self.spriteMap = love.graphics.newImage(_imgpath)
+  self.sprite = love.graphics.newQuad(_qx, _qy, _qw, _qh, self.spriteMap:getWidth(), self.spriteMap:getHeight())
+  self.width = _qw
+  self.height = _qh
 
   -- strength coltrols who gets pushed
   self.strength = 0
@@ -28,14 +29,10 @@ function Actor:update(dt)
   self.last.y = self.y
   --reset tempStrength
   self.tempStrength = self.strength
-
-  -- physics
-  self.gravity = self.gravity + self.weight * dt
-  self.y = self.y + self.gravity * dt
 end
 
 function Actor:draw()
-  love.graphics.draw(self.image, self.x, self.y)
+  love.graphics.draw(self.spriteMap, self.sprite, self.x, self.y)
 end
 
 function Actor:wasAlignedWithVert(other)

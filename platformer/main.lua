@@ -1,6 +1,7 @@
 io.stdout:setvbuf("no")
 local sti = require "lib/sti/sti"
 local inspect = require "lib/inspect"
+local Player = require "actors/player"
 
 -- helper function
 local function drawBox(x,y,r,g,b)
@@ -14,21 +15,7 @@ local function drawBox(x,y,r,g,b)
   love.graphics.setColor(1,1,1)
 end
 
-function love.load()
-  map = sti("tilemaps/map.lua")
-  print(inspect(map.layers["solids"].data[5][1]))
-end
-
-function love.update( dt )
-
-end
-
-function love.keypressed(key)
-
-end
-
-function love.draw()
-  map:draw(0,0)
+function drawDebug()
   for y=1,map.height do
     for x=1,map.width do
       local tile = map.layers["solids"].data[y][x]
@@ -49,6 +36,25 @@ function love.draw()
 
   local player = map.layers["player"].objects[1]
   drawBox(player.x, player.y, 0, 1, 0)
+end
+
+function love.load()
+  player = Player(10, 10)
+  map = sti("tilemaps/map.lua")
+end
+
+function love.update( dt )
+
+end
+
+function love.keypressed(key)
+
+end
+
+function love.draw()
+  map:draw(0,0)
+  player:draw()
+  drawDebug()
 end
 
 function love.keypressed(key)

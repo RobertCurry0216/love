@@ -3,7 +3,7 @@ local Actor = require("actors.actor")
 local Player = Actor:extend()
 
 function Player:new(_x, _y)
-  Player.super.new(self, _x, _y, "assets/player.png")
+  Player.super.new(self, _x, _y, "/assets/1bit_tileset.png", 96, 32, 16, 16)
   self.strength = 10
   self.canJump = true
 end
