@@ -2,6 +2,7 @@ io.stdout:setvbuf("no")
 local sti = require "lib/sti/sti"
 local inspect = require "lib/inspect"
 local Player = require "actors/player"
+local Box = require("actors/box")
 
 -- helper function
 local function drawBox(x,y,r,g,b)
@@ -39,8 +40,19 @@ function drawDebug()
 end
 
 function love.load()
-  player = Player(10, 10)
+  --player = Player(10, 10)
   map = sti("tilemaps/map.lua")
+  walls = {}
+
+  -- create walls
+  for y=1,map.height do
+    for x=1,map.width do
+      local tile = map.layers["solids"].data[y][x]
+      if tile then
+        table.insert( walls, Box((x-1) * tile.width, (y-1) * tile.height, 16, 16))
+      end
+    end
+  end
 end
 
 function love.update( dt )
@@ -53,8 +65,11 @@ end
 
 function love.draw()
   map:draw(0,0)
-  player:draw()
-  drawDebug()
+  --player:draw()
+  --drawDebug()
+  for _, w in ipairs(walls) do
+    w:drawCollisionBox()
+  end
 end
 
 function love.keypressed(key)
