@@ -16,12 +16,22 @@ end
 
 function Player:update(dt)
   Player.super.update(self, dt)
-  local dx = getDirectionInput()
-  self.x = self.x + dx * 200 * dt
-
+  self.boxColor.r = 0
+  self.boxColor.g = 1
+  self.boxColor.b = 0
+  
   if not(self.y == self.last.y) then
     self.canJump = false
   end
+  
+  --movement
+  local _x = self.x + getDirectionInput() * 100 * dt
+  local _y = self.y + self.gravity * dt
+
+  -- apply movements
+  local new_x, new_y, cols, len = world:move(self, _x, _y)
+  self.x = new_x
+  self.y = new_y
 end
 
 function Player:keypressed(key)

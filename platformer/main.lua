@@ -1,75 +1,54 @@
-io.stdout:setvbuf("no")
+--io.stdout:setvbuf("no")
 local sti = require "lib/sti/sti"
+local bump = require "lib/bump/bump"
+
 local inspect = require "lib/inspect"
 local Player = require "actors/player"
-local Box = require("actors/box")
+local Wall = require "actors/wall"
 
--- helper function
-local function drawBox(x,y,r,g,b)
-  r = r and r or 1
-  g = g and g or 0
-  b = b and b or 0
-  love.graphics.setColor(r,g,b,0.1)
-  love.graphics.rectangle("fill", x, y, 16, 16)
-  love.graphics.setColor(r,g,b)
-  love.graphics.rectangle("line", x, y, 16, 16)
-  love.graphics.setColor(1,1,1)
-end
-
+-- debug stuff
 function drawDebug()
-  for y=1,map.height do
-    for x=1,map.width do
-      local tile = map.layers["solids"].data[y][x]
-      if tile then
-        drawBox((x-1) * tile.width, (y-1) * tile.height)
-      end
-    end
+  local boxes, len = world:getItems()
+  for _, w in ipairs(boxes) do
+    w:drawCollisionBox()
   end
-
-  for y=1,map.height do
-    for x=1,map.width do
-      local tile = map.layers["scenery"].data[y][x]
-      if tile then
-        drawBox((x-1) * tile.width, (y-1) * tile.height, 0, 0, 1)
-      end
-    end
-  end
-
-  local player = map.layers["player"].objects[1]
-  drawBox(player.x, player.y, 0, 1, 0)
 end
+
+-- main functions
 
 function love.load()
   --player = Player(10, 10)
   map = sti("tilemaps/map.lua")
-  walls = {}
+  world = bump.newWorld()
 
   -- create walls
   for y=1,map.height do
     for x=1,map.width do
       local tile = map.layers["solids"].data[y][x]
       if tile then
-        table.insert( walls, Box((x-1) * tile.width, (y-1) * tile.height, 16, 16))
+        Wall((x-1) * tile.width, (y-1) * tile.height, tile.width, tile.height)
       end
     end
+  end
+
+
+  -- create walls
+  for _, obj in ipairs(map.layers["player"].objects) do
+    Player(obj.x, obj.y, obj.width, obj.height)
   end
 end
 
 function love.update( dt )
-
-end
-
-function love.keypressed(key)
-
+  local items, len = world:getItems()
+  for _, obj in ipairs(items) do
+    obj:update(dt)
+  end
 end
 
 function love.draw()
   map:draw(0,0)
   --player:draw()
-  --drawDebug()
-  for _, w in ipairs(walls) do
-    w:drawCollisionBox()
-  end
+  drawDebug()
 end
 
 function love.keypressed(key)
