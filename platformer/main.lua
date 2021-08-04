@@ -22,15 +22,9 @@ function love.load()
   world = bump.newWorld()
 
   -- create walls
-  for y=1,map.height do
-    for x=1,map.width do
-      local tile = map.layers["solids"].data[y][x]
-      if tile then
-        Wall((x-1) * tile.width, (y-1) * tile.height, tile.width, tile.height)
-      end
-    end
+  for _, obj in ipairs(map.layers["solids"].objects) do
+    Wall(obj.x, obj.y, obj.width, obj.height)
   end
-
 
   -- create walls
   for _, obj in ipairs(map.layers["player"].objects) do
@@ -46,8 +40,7 @@ function love.update( dt )
 end
 
 function love.draw()
-  map:draw(0,0)
-  --player:draw()
+  map:drawTileLayer("background")
   drawDebug()
 end
 
