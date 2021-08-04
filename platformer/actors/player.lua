@@ -3,7 +3,7 @@ local Actor = require("actors.actor")
 local Player = Actor:extend()
 
 function Player:new(_x, _y)
-  Player.super.new(self, _x, _y, "/assets/1bit_tileset.png", 96, 32, 16, 16)
+  Player.super.new(self, _x, _y, "/assets/1bit_tileset.png", 96, 32, 32, 32)
   self.strength = 10
   self.canJump = true
 end
@@ -30,6 +30,18 @@ function Player:update(dt)
 
   -- apply movements
   local new_x, new_y, cols, len = world:move(self, _x, _y)
+
+  for _, col in ipairs(cols) do
+    if col.normal.y ~= 0 then
+      self.gravity = 0
+      if col.normal.y < 0 then
+        self.canJump = true
+      end
+    end
+  end
+
+  self.canJump = self.y == new_y
+  
   self.x = new_x
   self.y = new_y
 end
@@ -45,18 +57,6 @@ function Player:jump()
     self.gravity = -300
     self.canJump = false
   end
-end
-
-function Player:collideDown(other)
-  Player.super.collideDown(self, other)
-  self.canJump = true
-end
-
-function Player:checkResolve(other, direction) 
-  if other:is(Box) then
-    return direction == "down"
-  end
-  return true
 end
 
 return Player

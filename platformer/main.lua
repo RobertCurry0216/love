@@ -2,7 +2,7 @@
 local sti = require "lib/sti/sti"
 local bump = require "lib/bump/bump"
 
-local inspect = require "lib/inspect"
+inspect = require "lib/inspect"
 local Player = require "actors/player"
 local Wall = require "actors/wall"
 
@@ -26,10 +26,9 @@ function love.load()
     Wall(obj.x, obj.y, obj.width, obj.height)
   end
 
-  -- create walls
-  for _, obj in ipairs(map.layers["player"].objects) do
-    Player(obj.x, obj.y, obj.width, obj.height)
-  end
+  -- create player
+  local obj = map.layers["player"].objects[1]
+  player = Player(obj.x, obj.y)
 end
 
 function love.update( dt )
@@ -51,4 +50,6 @@ function love.keypressed(key)
   if key == "r" then
     love.event.quit("restart")
   end
+
+  player:keypressed(key)
 end

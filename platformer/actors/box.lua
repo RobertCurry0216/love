@@ -14,10 +14,6 @@ function Box:new(_x, _y, _w, _h)
   self.strength = 0
   self.tempStrength = 0
 
-  -- physics
-  self.weight = 400
-  self.gravity = 0
-
   -- previous location
   self.last = {}
   self.last.x = _x
@@ -43,6 +39,10 @@ function Box:drawCollisionBox()
   love.graphics.setColor(self.boxColor.r,self.boxColor.g,self.boxColor.b)
   love.graphics.rectangle("line", self.x, self.y, self.w, self.h)
   love.graphics.setColor(1,1,1)
+end
+
+function Box:destroy()
+  world:remove(self)
 end
 
 return Box

@@ -13,7 +13,7 @@ function Actor:new(_x, _y, _imgpath, _qx, _qy, _qw, _qh)
 
   -- physics
   self.weight = 400
-  self.gravity = 250
+  self.gravity = 0
 
   -- previous location
   self.last = {}
@@ -22,11 +22,9 @@ function Actor:new(_x, _y, _imgpath, _qx, _qy, _qw, _qh)
 end
 
 function Actor:update(dt) 
-  self.last.x = self.x
-  self.last.y = self.y
-  --reset tempStrength
-  self.tempStrength = self.strength
+  Actor.super.update(self, dt)
 
+  self.gravity = self.gravity + self.weight * dt
 end
 
 function Actor:draw()
