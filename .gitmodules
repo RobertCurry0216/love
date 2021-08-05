@@ -4,3 +4,6 @@
 [submodule ".\\platformer\\lib\\bump"]
 	path = .\\platformer\\lib\\bump
 	url = https://github.com/kikito/bump.lua.git
+[submodule "gamera"]
+	path = platformer/lib/gamera
+	url = git@github.com:kikito/gamera.git

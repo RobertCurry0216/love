@@ -1,8 +1,8 @@
 --io.stdout:setvbuf("no")
 local sti = require "lib/sti/sti"
 local bump = require "lib/bump/bump"
+local gamera = require "lib/gamera/gamera"
 
-inspect = require "lib/inspect"
 local Player = require "actors/player"
 local Wall = require "actors/wall"
 
@@ -17,9 +17,9 @@ end
 -- main functions
 
 function love.load()
-  --player = Player(10, 10)
   map = sti("tilemaps/map.lua")
   world = bump.newWorld()
+  cam = gamera.new(0,0,2000,2000)
 
   -- create walls
   for _, obj in ipairs(map.layers["solids"].objects) do
@@ -36,11 +36,14 @@ function love.update( dt )
   for _, obj in ipairs(items) do
     obj:update(dt)
   end
+  cam:setPosition(player.x + player.w/2, player.y + player.h / 2)
 end
 
 function love.draw()
-  map:drawTileLayer("background")
-  drawDebug()
+  cam:draw(function (l,t,w,h)
+    map:drawTileLayer("background")
+    drawDebug()
+  end)
 end
 
 function love.keypressed(key)

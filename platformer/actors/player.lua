@@ -39,8 +39,6 @@ function Player:update(dt)
       end
     end
   end
-
-  self.canJump = self.y == new_y
   
   self.x = new_x
   self.y = new_y
