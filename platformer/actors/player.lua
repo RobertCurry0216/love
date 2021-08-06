@@ -3,9 +3,13 @@ local Actor = require("actors.actor")
 local Player = Actor:extend()
 
 function Player:new(_x, _y)
-  Player.super.new(self, _x, _y, "/assets/1bit_tileset.png", 96, 32, 32, 32)
+  Player.super.new(self, _x, _y, 32, 32, "/assets/1bit_tileset.png")
   self.strength = 10
   self.canJump = true
+
+  self.boxColor.r = 0
+  self.boxColor.g = 1
+  self.boxColor.b = 0
 end
 
 local function getDirectionInput()
@@ -16,9 +20,6 @@ end
 
 function Player:update(dt)
   Player.super.update(self, dt)
-  self.boxColor.r = 0
-  self.boxColor.g = 1
-  self.boxColor.b = 0
   
   if not(self.y == self.last.y) then
     self.canJump = false
