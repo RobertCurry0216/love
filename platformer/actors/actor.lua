@@ -7,9 +7,13 @@ function Actor:new(_x, _y, _w, _h, _imgpath)
   self.spriteMap = love.graphics.newImage(_imgpath)
   self.sprites = {}
 
-  for y=0,self.spriteMap:getHeight-_h,_h do
-    for x=0,self.spriteMap:getWidth()-_w,_w do
-      table.insert(self.sprites, love.graphics.newQuad(x, y, _w, _h, self.spriteMap:getWidth(), self.spriteMap:getHeight()))
+  local mapW = self.spriteMap:getWidth()
+  local mapH = self.spriteMap:getHeight()
+
+  for y=0,mapH-_h,_h do
+    for x=0,mapW-_w,_w do
+      print(x..':'..y)
+      table.insert(self.sprites, love.graphics.newQuad(x, y, _w, _h, mapW, mapH))
     end
   end
 
@@ -21,6 +25,7 @@ function Actor:new(_x, _y, _w, _h, _imgpath)
     }
   }
   self.curState = "idle"
+  self.curFrame = 1
 
   -- strength coltrols who gets pushed
   self.strength = 0
@@ -43,7 +48,8 @@ function Actor:update(dt)
 end
 
 function Actor:draw()
-  love.graphics.draw(self.spriteMap, self.sprite, self.x, self.y)
+  local quad = self.sprites[self.state[self.curState].frames[self.curFrame]]
+  love.graphics.draw(self.spriteMap, quad, self.x, self.y)
 end
 
 return Actor

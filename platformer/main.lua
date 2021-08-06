@@ -42,7 +42,8 @@ end
 function love.draw()
   cam:draw(function (l,t,w,h)
     map:drawTileLayer("background")
-    drawDebug()
+    --drawDebug()
+    player:draw()
   end)
 end
 
