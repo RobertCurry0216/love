@@ -15,6 +15,8 @@ A simple out line for a platformer engine to make it easier for get started maki
 - [x] basic platforming controls (moving/jumping)
 - [x] sprite animation system
 - [ ] acceleration
+- [ ] improve jumping
+- [ ] update collider functions
 - [ ] jump through platforms
 - [ ] pickups/coins
 - [ ] coyote time

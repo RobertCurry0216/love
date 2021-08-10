@@ -27,7 +27,7 @@ function Actor:new(_x, _y, _w, _h, _imgpath)
   self.curFrame = 1
   self.animTicks = 0
 
-  -- strength coltrols who gets pushed
+  -- strength controls who gets pushed
   self.strength = 0
   self.tempStrength = 0
 

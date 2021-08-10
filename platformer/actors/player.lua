@@ -10,6 +10,14 @@ function Player:new(_x, _y)
 
   self.flipX = false
 
+  -- movement vars
+  self.acc = 2.5
+  self.dcc = 0.8
+  self.maxSpeed = 3
+
+  self.dx = 0
+  self.dy = 0
+
   -- state
   self.state = {
     idle={
@@ -54,22 +62,26 @@ function Player:update(dt)
   
   --movement
   local dirX = getDirectionInput()
-  local _x = self.x + dirX * 100 * dt
-  local _y = self.y + self.gravity * dt
-
+  if not self.grounded then
+    self.dy = self.gravity * dt
+  end
+  
   if dirX ~= 0 then
+    self.dx = math.max(math.min(self.dx + dirX * self.acc * dt, self.maxSpeed), -self.maxSpeed)
     self.flipX = dirX < 0
+  else
+    self.dx = self.dx * self.dcc
   end
 
   -- apply movements
-  local new_x, new_y, cols, len = world:move(self, _x, _y)
+  local new_x, new_y, cols, len = world:move(self, self.x + self.dx, self.y + self.dy)
   
   --check collisions
   self:checkCollisions(cols)
 
   --set state
   if self.grounded then
-    if new_x == self.x then
+    if dirX == 0 then
       self:setState "idle"
     else
       self:setState "run"
@@ -81,8 +93,6 @@ function Player:update(dt)
       self:setState "fall"
     end
   end
-
-  print(self.curState)
 
   self.x = new_x
   self.y = new_y
