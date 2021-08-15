@@ -7,3 +7,9 @@
 [submodule "gamera"]
 	path = platformer/lib/gamera
 	url = git@github.com:kikito/gamera.git
+[submodule "bytepath/classic"]
+	path = bytepath/lib/classic
+	url = https://github.com/rxi/classic.git
+[submodule "bytepath/boipushy"]
+	path = bytepath/lib/boipushy
+	url = https://github.com/a327ex/boipushy.git

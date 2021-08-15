@@ -1,5 +1,3 @@
-local Object = require("lib.classic")
-
 local Box = Object:extend()
 
 function Box:new(_x, _y, _w, _h)
