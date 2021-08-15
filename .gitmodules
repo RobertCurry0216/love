@@ -13,3 +13,9 @@
 [submodule "bytepath/boipushy"]
 	path = bytepath/lib/boipushy
 	url = https://github.com/a327ex/boipushy.git
+[submodule "bytepath/hump"]
+	path = bytepath/lib/hump
+	url = https://github.com/vrld/hump.git
+[submodule "bytepath/Moses"]
+	path = bytepath/lib/Moses
+	url = https://github.com/Yonaba/Moses.git
