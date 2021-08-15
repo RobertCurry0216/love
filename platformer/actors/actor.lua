@@ -1,5 +1,3 @@
-local Box = require("actors.box")
-
 local Actor = Box:extend()
 
 function Actor:new(_x, _y, _w, _h, _imgpath)

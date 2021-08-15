@@ -1,5 +1,3 @@
-local Actor = require("actors.actor")
-
 local Player = Actor:extend()
 
 function Player:new(_x, _y)

@@ -1,5 +1,3 @@
-local Box = require("actors.box")
-
 local Wall = Box:extend()
 
 function Wall:new(_x, _y, _w, _h)

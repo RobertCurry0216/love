@@ -1,10 +1,6 @@
---io.stdout:setvbuf("no")
-local sti = require "lib/sti/sti"
-local bump = require "lib/bump/bump"
-local gamera = require "lib/gamera/gamera"
+io.stdout:setvbuf("no")
 
-local Player = require "actors/player"
-local Wall = require "actors/wall"
+require "init"
 
 -- debug stuff
 function drawDebug()
