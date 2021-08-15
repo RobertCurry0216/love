@@ -1,11 +1,14 @@
 require "init"
 
 function love.load()
+  input = Input()
+  input:bind("mouse1", "move")
+  input:bind("mouse2", "move")
   c = HyperCircle(400, 300, 50, 75)
 end
 
 function love.update(dt)
-
+  c:update(dt)
 end
 
 function love.draw()
