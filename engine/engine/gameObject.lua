@@ -17,4 +17,8 @@ function GameObject:draw()
   
 end
 
+function GameObject:__tostring()
+  return "<obj:"..tostring(self.id)..">"
+end
+
 return GameObject
