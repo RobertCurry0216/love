@@ -11,6 +11,9 @@ function Area:update(dt)
     obj:update(dt)
     if obj.dead then
       table.remove( self.game_objects, i)
+      if self.world then
+        self.world:remove(self.game_objects[i])
+      end
     end
   end
 end
@@ -24,7 +27,14 @@ end
 function Area:addObject(objType, ...)
   local obj = _G[objType](self, ...)
   table.insert(self.game_objects, obj)
+  if self.world then
+    self.world:add(obj, obj.x, obj.y, obj.w, obj.h)
+  end
   return obj
+end
+
+function Area:addCollisionWorld()
+  self.world = Bump.newWorld()
 end
 
 return Area

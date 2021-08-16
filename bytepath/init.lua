@@ -5,6 +5,7 @@ Timer = require "lib.hump.timer"
 Camera = require "lib.hump.camera"
 Shake = require "lib.hump.shake"
 M = require "lib.Moses.moses"
+Bump = require "lib.bump.bump"
 
 --utils
 require "utils.utils"
@@ -19,5 +20,4 @@ GameObject = require "engine.gameObject"
 Stage = require "rooms.stage"
 
 --classes
-Circle = require "objects.circle"
-HyperCircle = require "objects.hyperCircle"
+Player = require "objects.player"

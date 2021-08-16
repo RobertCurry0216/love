@@ -3,7 +3,7 @@ local Stage = Room:extend()
 function Stage:new()
   self.area = Area(self)
   self.main_canvas = love.graphics.newCanvas(gw, gh)
-  self.area:addObject("HyperCircle", gw/2, gh/2, 30, 45)
+  self.area:addObject("Player", gw/2, gh/2)
 end
 
 function Stage:update(dt)

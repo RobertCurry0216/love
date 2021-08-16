@@ -9,7 +9,7 @@ function love.load()
   --globals
   input = Input()
   timer = Timer.new()
-  camera = Camera()
+  camera = Camera(gw/2, gh/2)
 
   --init game
   gotoRoom("Stage")
