@@ -1,9 +1,3 @@
-[submodule ".\\platformer\\lib\\sti"]
-	path = .\\platformer\\lib\\sti
-	url = https://github.com/karai17/Simple-Tiled-Implementation.git
-[submodule ".\\platformer\\lib\\bump"]
-	path = .\\platformer\\lib\\bump
-	url = https://github.com/kikito/bump.lua.git
 [submodule "gamera"]
 	path = platformer/lib/gamera
 	url = git@github.com:kikito/gamera.git
