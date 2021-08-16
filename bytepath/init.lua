@@ -13,9 +13,7 @@ Area = require "engine.area"
 GameObject = require "engine.gameObject"
 
 --rooms
-CircleRoom = require "rooms.circleRoom"
-RectangleRoom = require "rooms.rectangleRoom"
-PolygonRoom = require "rooms.polygonRoom"
+Stage = require "rooms.stage"
 
 --classes
 Circle = require "objects.circle"

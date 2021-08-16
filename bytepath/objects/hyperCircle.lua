@@ -18,8 +18,8 @@ end
 
 function HyperCircle:update(dt)
   if input:down("move", 0.01) then
-    self.x = love.mouse.getX()
-    self.y = love.mouse.getY()
+    self.x = love.mouse.getX()/sx
+    self.y = love.mouse.getY()/sy
   end
   if input:pressed("move") then
     print "start moving"
@@ -31,7 +31,9 @@ end
 
 function HyperCircle:draw()
   HyperCircle.super.draw(self)
+  love.graphics.setLineWidth(3)
   love.graphics.circle("line", self.x, self.y, self.r2)
+  love.graphics.setLineWidth(1) 
 end
 
 return HyperCircle

@@ -6,3 +6,8 @@ function UUID()
   end
   return (("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"):gsub("[xy]", fn))
 end
+
+function resize(s)
+  love.window.setMode(s*gw, s*gh)
+  sx, sy = s, s
+end

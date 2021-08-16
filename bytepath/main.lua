@@ -1,13 +1,18 @@
 require "init"
 
 function love.load()
+  --set mode
+  resize(2)
+  love.graphics.setDefaultFilter("nearest")
+  love.graphics.setLineStyle("rough")
+
+  --globals
   input = Input()
   timer = Timer.new()
-  gotoRoom("CircleRoom")
+
+  --init game
+  gotoRoom("Stage")
   input:bind("mouse1", "move")
-  input:bind("f1", function() gotoRoom("CircleRoom") end)
-  input:bind("f2", function() gotoRoom("RectangleRoom") end)
-  input:bind("f3", function() gotoRoom("PolygonRoom") end)
 end
 
 function love.update(dt)
