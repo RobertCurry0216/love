@@ -3,6 +3,7 @@ local Area = Object:extend()
 function Area:new(room)
   self.room = room
   self.game_objects = {}
+  self.world = nil
 end
 
 function Area:update(dt)

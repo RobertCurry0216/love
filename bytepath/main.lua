@@ -11,9 +11,12 @@ function love.load()
   timer = Timer.new()
   camera = Camera(gw/2, gh/2)
 
+  --controls
+  input:bind("left", "left")
+  input:bind("right", "right")
+
   --init game
   gotoRoom("Stage")
-  input:bind("mouse1", "move")
   input:bind("f3", function() camera:shake(4,60,1) end)
 end
 

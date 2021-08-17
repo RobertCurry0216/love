@@ -24,4 +24,17 @@ function GameObject:getCenter()
   return _x,_y
 end
 
+function GameObject:move(goalX, goalY)
+  if self.area.world then
+    local _x, _y, _cols, _l = self.area.world:move(self, goalX, goalY)
+    self.x = _x
+    self.y = _y
+    return _cols, _l
+  else
+    self.x = goalX
+    self.y = goalY
+    return {}, 0
+  end
+end
+
 return GameObject

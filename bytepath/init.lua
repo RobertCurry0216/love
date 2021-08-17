@@ -6,6 +6,7 @@ Camera = require "lib.hump.camera"
 Shake = require "lib.hump.shake"
 M = require "lib.Moses.moses"
 Bump = require "lib.bump.bump"
+V = require "lib.hump.vector-light"
 
 --utils
 require "utils.utils"
