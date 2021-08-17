@@ -23,20 +23,24 @@ function Player:update(dt)
   self.vel = math.min(self.vel + self.acc*dt, self.maxVel)
   local _x, _y = V.fromPolar(self.dir, self.vel*dt)
   local _cols, _l = self:move(self.x + _x, self.y + _y)
+
+  --keep in bounds
+  if outsideScreen(self:getCenter()) then
+    self:destroy()
+  end 
 end
 
 function Player:draw()
   local cx,cy = self:getCenter()
   local fx,fy = V.fromPolar(self.dir, self.size)
   love.graphics.circle("line", cx, cy, self.size*0.7)
-  --love.graphics.rectangle("line", self.x, self.y, self.size, self.size)
-  love.graphics.line(cx, cy, cx+fx, cy+fy)
 end
 
 function Player:shoot()
   local cx, cy = self:getCenter()
   local px, py = V.fromPolar(self.dir, self.size)
   self.area:addObject("ShootEffect", cx+px, cy+py, self)
+  self.area:addObject("Projectile", cx+px, cy+py, self.dir)
 end
 
 return Player

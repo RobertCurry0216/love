@@ -26,3 +26,7 @@ function pushRotateScale(x, y, r, sx, sy)
   love.graphics.scale(sx or 1, sy or sx or 1)
   love.graphics.translate(-x, -y)
 end
+
+function outsideScreen(x,y)
+  return x < 0 or y < 0 or x > gw or y > gh
+end

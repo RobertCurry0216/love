@@ -27,9 +27,11 @@ function GameObject:destroy()
 end
 
 function GameObject:getCenter()
-  local _x = self.x + self.size/2
-  local _y = self.y + self.size/2
-  return _x,_y
+  return self.x + self.size/2, self.y + self.size/2
+end
+
+function GameObject:drawCollider()
+  love.graphics.rectangle("line", self.x, self.y, self.size, self.size)
 end
 
 function GameObject:move(goalX, goalY)

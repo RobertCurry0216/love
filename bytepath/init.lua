@@ -1,3 +1,6 @@
+--globals
+require "globals"
+
 -- external libs
 Object = require "lib.classic.classic"
 Input = require "lib.boipushy.input"
@@ -22,4 +25,8 @@ Stage = require "rooms.stage"
 
 --classes
 Player = require "objects.player"
-ShootEffect = require "objects.shootEffect"
+Projectile = require "objects.projectile"
+
+--effects
+ShootEffect = require "objects.effects.shootEffect"
+ProjectileDeathEffect = require "objects.effects.projectileDeathEffect"
