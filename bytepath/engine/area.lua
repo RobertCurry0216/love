@@ -30,7 +30,6 @@ function Area:addObject(objType, ...)
   obj.type = objType
   table.insert(self.game_objects, obj)
   if self.world and obj.collidable then
-    print(objType)
     self.world:add(obj, obj.x, obj.y, obj.size, obj.size)
   end
   return obj

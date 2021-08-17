@@ -22,6 +22,8 @@ end
 
 function GameObject:destroy()
   self.dead = true
+  self.timer:clear()
+  self.timer = nil
 end
 
 function GameObject:getCenter()

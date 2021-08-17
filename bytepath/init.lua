@@ -22,5 +22,4 @@ Stage = require "rooms.stage"
 
 --classes
 Player = require "objects.player"
-Wall = require "objects.wall"
 ShootEffect = require "objects.shootEffect"

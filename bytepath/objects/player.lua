@@ -29,7 +29,7 @@ function Player:draw()
   local cx,cy = self:getCenter()
   local fx,fy = V.fromPolar(self.dir, self.size)
   love.graphics.circle("line", cx, cy, self.size*0.7)
-  love.graphics.rectangle("line", self.x, self.y, self.size, self.size)
+  --love.graphics.rectangle("line", self.x, self.y, self.size, self.size)
   love.graphics.line(cx, cy, cx+fx, cy+fy)
 end
 
