@@ -12,8 +12,8 @@ function Area:update(dt)
     obj:update(dt)
     if obj.dead then
       table.remove( self.game_objects, i)
-      if self.world then
-        self.world:remove(self.game_objects[i])
+      if self.world and obj.collidable then
+        self.world:remove(obj)
       end
     end
   end
@@ -27,9 +27,11 @@ end
 
 function Area:addObject(objType, ...)
   local obj = _G[objType](self, ...)
+  obj.type = objType
   table.insert(self.game_objects, obj)
-  if self.world then
-    self.world:add(obj, obj.x, obj.y, obj.w, obj.h)
+  if self.world and obj.collidable then
+    print(objType)
+    self.world:add(obj, obj.x, obj.y, obj.size, obj.size)
   end
   return obj
 end

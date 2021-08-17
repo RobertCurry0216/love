@@ -1,6 +1,8 @@
 local GameObject = Object:extend()
 
 function GameObject:new(area, x, y)
+  self.type = "GameObject"
+  self.collidable = true
   self.area = area
   self.x = x
   self.y = y
@@ -18,6 +20,10 @@ function GameObject:draw()
   
 end
 
+function GameObject:destroy()
+  self.dead = true
+end
+
 function GameObject:getCenter()
   local _x = self.x + self.size/2
   local _y = self.y + self.size/2
@@ -26,7 +32,7 @@ end
 
 function GameObject:move(goalX, goalY)
   if self.area.world then
-    local _x, _y, _cols, _l = self.area.world:move(self, goalX, goalY)
+    local _x, _y, _cols, _l = self.area.world:move(self, goalX, goalY, self.filter)
     self.x = _x
     self.y = _y
     return _cols, _l
@@ -35,6 +41,10 @@ function GameObject:move(goalX, goalY)
     self.y = goalY
     return {}, 0
   end
+end
+
+function GameObject:filter(other)
+  return "cross"
 end
 
 return GameObject

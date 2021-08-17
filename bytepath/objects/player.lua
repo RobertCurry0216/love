@@ -10,6 +10,9 @@ function Player:new(area, x, y)
   self.vel = 0
   self.maxVel = 100
   self.acc = 100
+
+  --shooting
+  self.timer:every(0.24, function() self:shoot() end)
 end
 
 function Player:update(dt)
@@ -24,10 +27,16 @@ end
 
 function Player:draw()
   local cx,cy = self:getCenter()
-  local fx,fy = V.fromPolar(self.dir, self.size*2)
+  local fx,fy = V.fromPolar(self.dir, self.size)
   love.graphics.circle("line", cx, cy, self.size*0.7)
   love.graphics.rectangle("line", self.x, self.y, self.size, self.size)
   love.graphics.line(cx, cy, cx+fx, cy+fy)
+end
+
+function Player:shoot()
+  local cx, cy = self:getCenter()
+  local px, py = V.fromPolar(self.dir, self.size)
+  self.area:addObject("ShootEffect", cx+px, cy+py, self)
 end
 
 return Player

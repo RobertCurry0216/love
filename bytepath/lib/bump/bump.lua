@@ -65,7 +65,7 @@ local function assertIsRect(x,y,w,h)
 end
 
 local defaultFilter = function()
-  return 'cross'
+  return 'slide'
 end
 
 ------------------------------------------
