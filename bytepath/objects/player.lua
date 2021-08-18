@@ -2,7 +2,7 @@ local Player = GameObject:extend()
 
 function Player:new(area, x, y)
   Player.super.new(self, area, x, y)
-  self.size = 25
+  self.size = 20
 
   --movement vars
   self.dir = -math.pi/2
@@ -13,6 +13,8 @@ function Player:new(area, x, y)
 
   --shooting
   self.timer:every(0.24, function() self:shoot() end)
+
+  input:bind("space", function() self:die() end)
 end
 
 function Player:update(dt)
@@ -26,7 +28,7 @@ function Player:update(dt)
 
   --keep in bounds
   if outsideScreen(self:getCenter()) then
-    self:destroy()
+    self:die()
   end 
 end
 
@@ -34,6 +36,17 @@ function Player:draw()
   local cx,cy = self:getCenter()
   local fx,fy = V.fromPolar(self.dir, self.size)
   love.graphics.circle("line", cx, cy, self.size*0.7)
+end
+
+function Player:die()
+  self:destroy()
+  slow(0.15, 1)
+  camera:shake(6,60, 0.4)
+  flash(4)
+  local x, y = self:getCenter()
+  for i=1,random(8,12) do
+    self.area:addObject("ExplodeEffect", x, y)
+  end
 end
 
 function Player:shoot()

@@ -30,3 +30,15 @@ end
 function outsideScreen(x,y)
   return x < 0 or y < 0 or x > gw or y > gh
 end
+
+function slow(amount, duration)
+  slow_amount = amount
+  if slow_timer then timer:cancel(slow_timer) end
+  slow_timer = timer:tween(duration, _G, {slow_amount=1}, "in-out-cubic", function() slow_timer = nil end)
+end
+
+function flash(frames)
+  if not flash_frames or flash_frames < frames then 
+    flash_frames = frames
+  end
+end

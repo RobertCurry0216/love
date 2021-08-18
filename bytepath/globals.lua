@@ -1,3 +1,9 @@
+-- vars
+slow_amount = 1
+slow_timer = nil
+flash_frames = 0
+
+-- colors
 default_color = {222/255, 222/255, 222/255}
 background_color = {16/255, 16/255, 16/255}
 ammo_color = {123/255, 200/255, 164/255}

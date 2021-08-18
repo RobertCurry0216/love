@@ -30,3 +30,4 @@ Projectile = require "objects.projectile"
 --effects
 ShootEffect = require "objects.effects.shootEffect"
 ProjectileDeathEffect = require "objects.effects.projectileDeathEffect"
+ExplodeEffect = require "objects.effects.explodeEffect"
