@@ -5,7 +5,7 @@ function Player:new(area, x, y)
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
-  self.ship = player_ships.capsule
+  self.ship = player_ships.seer
 
   --movement vars
   self.dir = -math.pi/2
@@ -43,7 +43,7 @@ function Player:update(dt)
   end
   if input:down("dwindle") then
     self.maxVel = self.baseMaxVel*0.5
-    self.trailColor = boost_color
+    self.trailColor = dwindle_color
   end
 
   self.vel = math.min(self.vel + self.acc*dt, self.maxVel)
