@@ -9,6 +9,8 @@ function GameObject:new(area, x, y)
   self.area = area
   self.x = x
   self.y = y
+  self.cx = x + 5
+  self.cy = y + 5
   self.size = 10
   self.dead = false
   self.timer = Timer()
@@ -16,6 +18,7 @@ end
 
 function GameObject:update(dt)
   if self.timer then self.timer:update(dt) end
+  self.cx, self.cy = self:getCenter()
 end
 
 function GameObject:draw()
@@ -24,8 +27,10 @@ end
 
 function GameObject:destroy()
   self.dead = true
-  self.timer:clear()
-  self.timer = nil
+  if self.timer then
+    self.timer:clear()
+    self.timer = nil
+  end
 end
 
 function GameObject:getCenter()

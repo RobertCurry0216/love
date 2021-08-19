@@ -10,6 +10,8 @@ Shake = require "lib.hump.shake"
 M = require "lib.Moses.moses"
 Bump = require "lib.bump.bump"
 V = require "lib.hump.vector-light"
+Draft = require "lib.draft.draft"
+require "lib.utf8"
 
 --utils
 require "utils.utils"
@@ -23,10 +25,14 @@ require "engine.gameObject"
 --rooms
 require "rooms.stage"
 
---classes
+--game objects
 require "objects.player"
 require "objects.ships"
 require "objects.projectile"
+
+require "objects.pickups.pickup"
+require "objects.pickups.ammoPickup"
+require "objects.pickups.boostPickup"
 
 --effects
 require "objects.effects.shootEffect"
@@ -34,3 +40,6 @@ require "objects.effects.projectileDeathEffect"
 require "objects.effects.explodeEffect"
 require "objects.effects.tickEffect"
 require "objects.effects.trailEffect"
+require "objects.effects.ammoEffect"
+require "objects.effects.boostEffect"
+require "objects.effects.textEffect"

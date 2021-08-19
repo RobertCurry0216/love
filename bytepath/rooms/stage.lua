@@ -4,7 +4,9 @@ function Stage:new()
   self.main_canvas = love.graphics.newCanvas(gw, gh)
   self.area = Area(self)
   self.area:addCollisionWorld()
-  self.area:addObject("Player", gw/2, gh/2)
+  self.player = self.area:addObject("Player", gw/2, gh/2)
+
+  timer:every(1, function() self.area:addObject("BoostPickup") end)
 end
 
 function Stage:update(dt)

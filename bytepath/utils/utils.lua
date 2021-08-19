@@ -27,8 +27,9 @@ function pushRotateScale(x, y, r, sx, sy)
   love.graphics.translate(-x, -y)
 end
 
-function outsideScreen(x,y)
-  return x < 0 or y < 0 or x > gw or y > gh
+function outsideScreen(x,y,buffer)
+  buffer = buffer or 0
+  return x < -buffer or y < -buffer or x > gw+buffer or y > gh+buffer
 end
 
 function slow(amount, duration)
@@ -40,5 +41,13 @@ end
 function flash(frames)
   if not flash_frames or flash_frames < frames then 
     flash_frames = frames
+  end
+end
+
+function explode(area, x, y, opts)
+  opts = opts or {}
+  local n = opts.n or 10
+  for i=1,random(n-2,n+2) do
+    area:addObject("ExplodeEffect", x, y, opts.size, opts.vel, opts.life, opts.color)
   end
 end

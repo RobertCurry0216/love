@@ -6,7 +6,7 @@ function Player:new(area, x, y)
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
-  self.ship = player_ships.claw
+  self.ship = player_ships.fighter
 
   --movement vars
   self.dir = -math.pi/2
@@ -20,11 +20,11 @@ function Player:new(area, x, y)
   self.maxHp = 100
   self.hp = self.maxHp
   self.maxAmmo = 100
-  self.ammo = self.maxAmmo
+  self.ammo = 0 -- self.maxAmmo
 
   --boost stats
   self.boost = 100
-  self.boostMax = 100
+  self.maxBoost = 100
   self.boostRegen = 10
   self.boostRate = 50
   self.boostCoolDownPeriod = 2
@@ -45,7 +45,6 @@ end
 
 function Player:update(dt)
   Player.super.update(self, dt)
-  self.cx, self.cy = self:getCenter()
   self.maxVel = self.baseMaxVel
   self.trailColor = trail_color
 
@@ -67,18 +66,27 @@ function Player:update(dt)
   local _x, _y = V.fromPolar(self.dir, self.vel*dt)
   local _cols, _l = self:move(self.x + _x, self.y + _y)
 
+  --collisions
+  for _, c in ipairs(_cols) do
+    local other = c.other
+    local type = other.type
+    if type == "pickup" then
+      other:onPickup(self)
+    end
+  end
+
   --boost
   if self.boost < 1 and self.canBoost then
     self.canBoost = false
     self.timer:tween(
       self.boostCoolDownPeriod,
       self,
-      {boost = self.boostMax},
+      {boost = self.maxBoost},
       "linear",
       function() self.canBoost = true end
     )
   else
-    self.boost = math.min(self.boost + self.boostRegen*dt, self.boostMax)
+    self.boost = math.min(self.boost + self.boostRegen*dt, self.maxBoost)
   end
 
   --keep in bounds
@@ -117,9 +125,7 @@ function Player:die()
   slow(0.15, 1)
   camera:shake(6,60, 0.4)
   flash(4)
-  for i=1,random(8,12) do
-    self.area:addObject("ExplodeEffect", self.cx, self.cy)
-  end
+  explode(self.area, self.cx, self.cy)
 end
 
 function Player:shoot()

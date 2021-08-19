@@ -10,6 +10,7 @@ function love.load()
   input = Input()
   timer = Timer.new()
   camera = Camera(gw/2, gh/2)
+  draft = Draft("line")
 
   --controls
   input:bind("left", "left")
@@ -19,7 +20,6 @@ function love.load()
 
   --init game
   gotoRoom("Stage")
-  input:bind("f3", function() camera:shake(4,60,1) end)
 end
 
 function love.update(dt)

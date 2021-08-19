@@ -10,18 +10,16 @@ function Projectile:update(dt)
   Projectile.super.update(self, dt)
   self:move(self.x+self.dx*dt, self.y+self.dy*dt)
 
-  if outsideScreen(self:getCenter()) then
-    self:destroy()
+  if outsideScreen(self.cx, self.cy) then
+    self:die()
   end 
 end
 
 function Projectile:draw()
-  local x,y = self:getCenter()
-  love.graphics.circle("line", x, y, self.size*0.7)
+  love.graphics.circle("line", self.cx, self.cy, self.size*0.7)
 end
 
-function Projectile:destroy()
-  Projectile.super.destroy(self)
-  local cx, cy = self:getCenter()
-  self.area:addObject("ProjectileDeathEffect", cx, cy, self.size*2, hp_color)
+function Projectile:die()
+  self:destroy()
+  self.area:addObject("ProjectileDeathEffect", self.cx, self.cy, self.size*2, hp_color)
 end
