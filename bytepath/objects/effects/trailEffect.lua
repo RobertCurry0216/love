@@ -3,6 +3,7 @@ TrailEffect = GameObject:extend()
 function TrailEffect:new(area, x, y, opts)
   TrailEffect.super.new(self, area, x, y)
   self.collidable = false
+  self.depth = 30
   opts = opts or {}
 
   self.r = opts.r or random(4,6)

@@ -3,6 +3,7 @@ TickEffect = GameObject:extend()
 function TickEffect:new(area, x, y, parent)
   TickEffect.super.new(self, area, x, y)
   self.collidable = false
+  self.depth = 80
   self.parent = parent
   self.yOffset = 0
   self.w = parent and parent.size or 10

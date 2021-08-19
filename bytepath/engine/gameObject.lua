@@ -1,13 +1,15 @@
 GameObject = Object:extend()
 
 function GameObject:new(area, x, y)
+  self.id = UUID()
   self.type = "GameObject"
+  self.creationTime = love.timer.getTime()
   self.collidable = true
+  self.depth = 50
   self.area = area
   self.x = x
   self.y = y
   self.size = 10
-  self.id = UUID()
   self.dead = false
   self.timer = Timer()
 end

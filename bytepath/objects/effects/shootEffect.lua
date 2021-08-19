@@ -3,6 +3,7 @@ ShootEffect = GameObject:extend()
 function ShootEffect:new(area, x, y, shooter)
   ShootEffect.super.new(self, area, x, y)
   self.collidable = false
+  self.depth = 30
   self.shooter = shooter
   self.size = 8
   self.timer:tween(0.1, self, {size=0}, "in-out-cubic", function() self:destroy() end)

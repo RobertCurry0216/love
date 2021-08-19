@@ -3,6 +3,7 @@ ProjectileDeathEffect = GameObject:extend()
 function ProjectileDeathEffect:new(area, x, y, s, c)
   ProjectileDeathEffect.super.new(self, area, x-s/2, y-s/2)
   self.collidable = false
+  self.depth = 30
   self.color = default_color
   self.size = s
   self.timer:after(0.1, function() self.color=c end)

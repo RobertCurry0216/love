@@ -20,6 +20,16 @@ function Area:update(dt)
 end
 
 function Area:draw()
+  table.sort(
+    self.game_objects, 
+    function(a,b)
+      if a.depth == b.depth then
+        return a.creationTime < b.creationTime
+      end
+      return a.depth < b.depth
+    end
+  )
+
   for _, obj in ipairs(self.game_objects) do
     obj:draw(dt)
   end

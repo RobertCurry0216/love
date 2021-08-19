@@ -2,10 +2,11 @@ Player = GameObject:extend()
 
 function Player:new(area, x, y)
   Player.super.new(self, area, x, y)
+  self.depth = 75
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
-  self.ship = player_ships.seer
+  self.ship = player_ships.claw
 
   --movement vars
   self.dir = -math.pi/2
