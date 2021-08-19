@@ -16,6 +16,20 @@ function Player:new(area, x, y)
   self.baseMaxVel = 100
   self.acc = 100
 
+  --player stats
+  self.maxHp = 100
+  self.hp = self.maxHp
+  self.maxAmmo = 100
+  self.ammo = self.maxAmmo
+
+  --boost stats
+  self.boost = 100
+  self.boostMax = 100
+  self.boostRegen = 10
+  self.boostRate = 50
+  self.boostCoolDownPeriod = 2
+  self.canBoost = true
+
   --shooting
   self.timer:every(0.24, function() self:shoot() end)
 
@@ -38,11 +52,13 @@ function Player:update(dt)
   --movement
   if input:down("left") then self.dir = self.dir - self.turningSpeed*dt end
   if input:down("right") then self.dir = self.dir + self.turningSpeed*dt end
-  if input:down("boost") then
+  if input:down("boost") and self.canBoost then
+    self.boost = self.boost - self.boostRate*dt
     self.maxVel = self.baseMaxVel*1.5
     self.trailColor = boost_color
   end
-  if input:down("dwindle") then
+  if input:down("dwindle") and self.canBoost then
+    self.boost = self.boost - self.boostRate*dt
     self.maxVel = self.baseMaxVel*0.5
     self.trailColor = dwindle_color
   end
@@ -50,6 +66,20 @@ function Player:update(dt)
   self.vel = math.min(self.vel + self.acc*dt, self.maxVel)
   local _x, _y = V.fromPolar(self.dir, self.vel*dt)
   local _cols, _l = self:move(self.x + _x, self.y + _y)
+
+  --boost
+  if self.boost < 1 and self.canBoost then
+    self.canBoost = false
+    self.timer:tween(
+      self.boostCoolDownPeriod,
+      self,
+      {boost = self.boostMax},
+      "linear",
+      function() self.canBoost = true end
+    )
+  else
+    self.boost = math.min(self.boost + self.boostRegen*dt, self.boostMax)
+  end
 
   --keep in bounds
   if outsideScreen(self:getCenter()) then
