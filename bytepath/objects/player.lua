@@ -5,7 +5,7 @@ function Player:new(area, x, y)
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
-  self.ship = player_ships.fighter
+  self.ship = player_ships.capsule
 
   --movement vars
   self.dir = -math.pi/2
@@ -92,13 +92,12 @@ function Player:die()
 end
 
 function Player:shoot()
-  local cx, cy = self:getCenter()
-  local px, py = V.fromPolar(self.dir, self.size)
-  self.area:addObject("ShootEffect", cx+px, cy+py, self)
-  self.area:addObject("Projectile", cx+px, cy+py, self.dir)
+  local u = self.size/2
+  local px, py = V.rotate(self.dir, self.ship.gun[1]*u, self.ship.gun[2]*u)
+  self.area:addObject("ShootEffect", self.cx+px, self.cy+py, self)
+  self.area:addObject("Projectile", self.cx+px, self.cy+py, self.dir)
 end
 
 function Player:tick()
-  local cx, cy = self:getCenter()
-  self.area:addObject("TickEffect", cx, cy, self)
+  self.area:addObject("TickEffect", self.cx, self.cy, self)
 end
