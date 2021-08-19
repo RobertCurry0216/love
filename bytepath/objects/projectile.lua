@@ -1,4 +1,4 @@
-local Projectile = GameObject:extend()
+Projectile = GameObject:extend()
 
 function Projectile:new(area, x, y, d)
   Projectile.super.new(self,area,x-2.5,y-2.5)
@@ -25,5 +25,3 @@ function Projectile:destroy()
   local cx, cy = self:getCenter()
   self.area:addObject("ProjectileDeathEffect", cx, cy, self.size*2, hp_color)
 end
-
-return Projectile

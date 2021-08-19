@@ -1,4 +1,4 @@
-local ShootEffect = GameObject:extend()
+ShootEffect = GameObject:extend()
 
 function ShootEffect:new(area, x, y, shooter)
   ShootEffect.super.new(self, area, x, y)
@@ -18,5 +18,3 @@ function ShootEffect:draw()
     love.graphics.pop()
   end
 end
-
-return ShootEffect

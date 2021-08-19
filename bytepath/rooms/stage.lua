@@ -1,4 +1,4 @@
-local Stage = Room:extend()
+Stage = Room:extend()
 
 function Stage:new()
   self.main_canvas = love.graphics.newCanvas(gw, gh)
@@ -26,5 +26,3 @@ function Stage:draw()
   love.graphics.draw(self.main_canvas, 0,0,0,sx,sy)
   love.graphics.setBlendMode("alpha")
 end
-
-return Stage

@@ -1,8 +1,4 @@
--- globals
-current_room = nil
-
--- Room Class
-local Room = Object:extend()
+Room = Object:extend()
 
 function Room:new()
 
@@ -20,5 +16,3 @@ end
 function gotoRoom(roomType, ...)
   current_room = _G[roomType](...)
 end
-
-return Room

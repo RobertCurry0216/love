@@ -16,18 +16,20 @@ require "utils.utils"
 require "utils.math"
 
 --engine
-Room = require "engine.room"
-Area = require "engine.area"
-GameObject = require "engine.gameObject"
+require "engine.room"
+require "engine.area"
+require "engine.gameObject"
 
 --rooms
-Stage = require "rooms.stage"
+require "rooms.stage"
 
 --classes
-Player = require "objects.player"
-Projectile = require "objects.projectile"
+require "objects.player"
+require "objects.projectile"
 
 --effects
-ShootEffect = require "objects.effects.shootEffect"
-ProjectileDeathEffect = require "objects.effects.projectileDeathEffect"
-ExplodeEffect = require "objects.effects.explodeEffect"
+require "objects.effects.shootEffect"
+require "objects.effects.projectileDeathEffect"
+require "objects.effects.explodeEffect"
+require "objects.effects.tickEffect"
+require "objects.effects.trailEffect"

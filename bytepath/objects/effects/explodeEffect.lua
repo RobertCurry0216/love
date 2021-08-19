@@ -1,4 +1,4 @@
-local ExplodeEffect = GameObject:extend()
+ExplodeEffect = GameObject:extend()
 
 function ExplodeEffect:new(area, x, y, size, vel, life, color)
   ExplodeEffect.super.new(self, area, x, y)
@@ -33,5 +33,3 @@ function ExplodeEffect:draw()
   love.graphics.setColor(1,1,1)
   love.graphics.pop()
 end
-
-return ExplodeEffect

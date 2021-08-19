@@ -1,4 +1,4 @@
-local ProjectileDeathEffect = GameObject:extend()
+ProjectileDeathEffect = GameObject:extend()
 
 function ProjectileDeathEffect:new(area, x, y, s, c)
   ProjectileDeathEffect.super.new(self, area, x-s/2, y-s/2)
@@ -14,5 +14,3 @@ function ProjectileDeathEffect:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.size, self.size)
   love.graphics.setColor(default_color)
 end
-
-return ProjectileDeathEffect

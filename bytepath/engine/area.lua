@@ -1,4 +1,4 @@
-local Area = Object:extend()
+Area = Object:extend()
 
 function Area:new(room)
   self.room = room
@@ -38,5 +38,3 @@ end
 function Area:addCollisionWorld()
   self.world = Bump.newWorld()
 end
-
-return Area

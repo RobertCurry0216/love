@@ -1,4 +1,4 @@
-local GameObject = Object:extend()
+GameObject = Object:extend()
 
 function GameObject:new(area, x, y)
   self.type = "GameObject"
@@ -50,5 +50,3 @@ end
 function GameObject:filter(other)
   return "cross"
 end
-
-return GameObject

@@ -14,6 +14,8 @@ function love.load()
   --controls
   input:bind("left", "left")
   input:bind("right", "right")
+  input:bind("up", "boost")
+  input:bind("down", "dwindle")
 
   --init game
   gotoRoom("Stage")
