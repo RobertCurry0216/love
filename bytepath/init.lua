@@ -25,6 +25,7 @@ require "rooms.stage"
 
 --classes
 require "objects.player"
+require "objects.ships"
 require "objects.projectile"
 
 --effects

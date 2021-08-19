@@ -5,6 +5,8 @@ function Player:new(area, x, y)
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
+  self.ship = player_ships.fighter
+
   --movement vars
   self.dir = -math.pi/2
   self.turningSpeed = 1.66*math.pi
@@ -21,13 +23,7 @@ function Player:new(area, x, y)
 
   --trail
   self.trailColor = trail_color
-  self.timer:every(
-    0.01,
-    function()
-      local px, py = V.fromPolar(self.dir + math.pi, self.size-4)
-      self.area:addObject("TrailEffect", self.cx+px, self.cy+py, {color=self.trailColor})
-    end
-  )
+  self.timer:every(0.01, function() self:trails() end)
 
   input:bind("space", function() self:die() end)
 end
@@ -61,8 +57,28 @@ function Player:update(dt)
 end
 
 function Player:draw()
-  local fx,fy = V.fromPolar(self.dir, self.size)
-  love.graphics.circle("line", self.cx, self.cy, self.size*0.7)
+  --love.graphics.circle("line", self.cx, self.cy, self.size*0.7)
+  local u = self.size / 2
+  pushRotate(self.cx, self.cy, self.dir)
+  for _, poly in ipairs(self.ship.polygons) do
+    local points = {}
+    for i=1,#poly,2 do
+       table.insert( points, poly[i]*u + self.cx )
+       table.insert( points, poly[i+1]*u + self.cy )
+    end
+    love.graphics.polygon("line", points)
+  end
+  love.graphics.pop()
+end
+
+function Player:trails()
+  local u = self.size/2
+  for i=1,#self.ship.trails,2 do
+    local x, y = self.ship.trails[i]*u, self.ship.trails[i+1]*u
+    local px, py = V.rotate(self.dir, x, y)
+    self.area:addObject("TrailEffect", self.cx+px, self.cy+py, {color=self.trailColor})
+  end
+
 end
 
 function Player:die()
