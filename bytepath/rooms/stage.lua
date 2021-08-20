@@ -27,5 +27,4 @@ function Stage:draw()
   love.graphics.setBlendMode("alpha", "premultiplied")
   love.graphics.draw(self.main_canvas, 0,0,0,sx,sy)
   love.graphics.setBlendMode("alpha")
-
 end

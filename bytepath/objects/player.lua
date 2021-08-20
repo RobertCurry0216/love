@@ -39,8 +39,6 @@ function Player:new(area, x, y)
   --trail
   self.trailColor = trail_color
   self.timer:every(0.01, function() self:trails() end)
-
-  input:bind("space", function() self:die() end)
 end
 
 function Player:update(dt)

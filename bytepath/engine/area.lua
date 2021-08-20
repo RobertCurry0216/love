@@ -42,6 +42,10 @@ function Area:addObject(objType, ...)
     local w = obj.w or obj.size
     local h = obj.h or obj.size
     self.world:add(obj, obj.x, obj.y, w, h)
+
+    if obj.afterCreate then
+      obj:afterCreate()
+    end
   end
   return obj
 end

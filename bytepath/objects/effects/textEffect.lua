@@ -3,7 +3,6 @@ TextEffect = GameObject:extend()
 function TextEffect:new(area, x, y, t, f, c)
   TextEffect.super.new(self, area, x, y)
   self.type = "TextEffect"
-  self.collidable = false
   self.vis = true
   self.depth = 80
   self.font = f
@@ -27,6 +26,22 @@ function TextEffect:new(area, x, y, t, f, c)
     self.timer:every(0.035, function() self:scramble() end)
   end)
   self.timer:after(1.3, function() self:destroy() end)
+end
+
+function TextEffect:afterCreate()
+  print("new Text")
+  if self.area.world then
+    local _, _, cols, l = self.area.world:check(self)
+    for _, col in ipairs(cols) do
+      if col.other.type == "TextEffect" then
+        local dx = (self.cx-col.other.cx+self.w/2) * col.normal.x
+        local dy = (self.cy-col.other.cy+self.h/2) * col.normal.y
+
+        self:move(self.x+dx, self.y+dy)
+        print(tostring(dx)..":"..tostring(dy))
+      end
+    end
+  end
 end
 
 function TextEffect:draw()

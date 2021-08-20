@@ -27,8 +27,8 @@ end
 function HPPickup:draw()
   draft:circle(self.cx, self.cy, self.size*1.5)
   love.graphics.setColor(hp_color)
-    draft:rectangle(self.cx, self.cy, self.size*0.3, self.size*0.7, "fill")
-    draft:rectangle(self.cx, self.cy, self.size*0.7, self.size*0.3, "fill")
+    draft:rectangle(self.cx, self.cy, self.size*0.3, self.size*0.85, "fill")
+    draft:rectangle(self.cx, self.cy, self.size*0.85, self.size*0.3, "fill")
   love.graphics.setColor(default_color)
 end
 
@@ -37,7 +37,7 @@ function HPPickup:onPickup(other)
   -- give boost
   other:addResource("hp", self.gain)
   -- explode
-  self.area:addObject("BoostEffect", self.cx, self.cy)
+  self.area:addObject("HPEffect", self.cx, self.cy)
   text(
     self.area,
     self.cx + random(-self.size, self.size),
