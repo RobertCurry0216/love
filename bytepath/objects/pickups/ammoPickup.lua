@@ -7,6 +7,8 @@ function AmmoPickup:new(area, x, y)
   self.dir = random(0, math.pi*2)
   self.spin = random(-math.pi, math.pi)
   self.ang = 0
+
+  self.gain = 5
 end
 
 function AmmoPickup:update(dt)
@@ -36,7 +38,7 @@ end
 function AmmoPickup:onPickup(other)
   AmmoPickup.super.onPickup(self, other)
   -- give ammo
-  other.ammo = math.min(other.ammo+5, other.maxAmmo)
+  other:addResource("ammo", self.gain)
   -- explode
   self.area:addObject("AmmoEffect", self.cx, self.cy)
   explode(self.area, self.cx, self.cy, {n=8, color=ammo_color})

@@ -2,6 +2,7 @@ TextEffect = GameObject:extend()
 
 function TextEffect:new(area, x, y, t, f, c)
   TextEffect.super.new(self, area, x, y)
+  self.type = "TextEffect"
   self.collidable = false
   self.vis = true
   self.depth = 80
@@ -9,6 +10,8 @@ function TextEffect:new(area, x, y, t, f, c)
   self.chars = {}
   self.color = c
   for i=1,#t do table.insert(self.chars, t:utf8sub(i,i)) end
+  self.h = self.font:getHeight()
+  self.w = self.font:getWidth(t)
 
   --colors
   self.bgColors = {}
@@ -19,11 +22,11 @@ function TextEffect:new(area, x, y, t, f, c)
   end
 
   --anim timers
-  self.timer:after(0.7, function()
+  self.timer:after(0.9, function()
     self.timer:every(0.05, function() self.vis = not self.vis end, 6)
     self.timer:every(0.035, function() self:scramble() end)
   end)
-  self.timer:after(1.1, function() self:destroy() end)
+  self.timer:after(1.3, function() self:destroy() end)
 end
 
 function TextEffect:draw()

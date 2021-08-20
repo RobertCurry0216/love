@@ -12,19 +12,19 @@ function Player:new(area, x, y)
   self.dir = -math.pi/2
   self.turningSpeed = 1.66*math.pi
   self.vel = 0
-  self.maxVel = 100
-  self.baseMaxVel = 100
+  self.velMax = 100
+  self.velMaxBase = 100
   self.acc = 100
 
   --player stats
-  self.maxHp = 100
-  self.hp = self.maxHp
-  self.maxAmmo = 100
-  self.ammo = 0 -- self.maxAmmo
+  self.hpMax = 100
+  self.hp = self.hpMax
+  self.ammoMax = 100
+  self.ammo = self.ammoMax
 
   --boost stats
   self.boost = 100
-  self.maxBoost = 100
+  self.boostMax = 100
   self.boostRegen = 10
   self.boostRate = 50
   self.boostCoolDownPeriod = 2
@@ -45,7 +45,7 @@ end
 
 function Player:update(dt)
   Player.super.update(self, dt)
-  self.maxVel = self.baseMaxVel
+  self.velMax = self.velMaxBase
   self.trailColor = trail_color
 
   --movement
@@ -53,16 +53,16 @@ function Player:update(dt)
   if input:down("right") then self.dir = self.dir + self.turningSpeed*dt end
   if input:down("boost") and self.canBoost then
     self.boost = self.boost - self.boostRate*dt
-    self.maxVel = self.baseMaxVel*1.5
+    self.velMax = self.velMaxBase*1.5
     self.trailColor = boost_color
   end
   if input:down("dwindle") and self.canBoost then
     self.boost = self.boost - self.boostRate*dt
-    self.maxVel = self.baseMaxVel*0.5
+    self.velMax = self.velMaxBase*0.5
     self.trailColor = dwindle_color
   end
 
-  self.vel = math.min(self.vel + self.acc*dt, self.maxVel)
+  self.vel = math.min(self.vel + self.acc*dt, self.velMax)
   local _x, _y = V.fromPolar(self.dir, self.vel*dt)
   local _cols, _l = self:move(self.x + _x, self.y + _y)
 
@@ -81,12 +81,12 @@ function Player:update(dt)
     self.timer:tween(
       self.boostCoolDownPeriod,
       self,
-      {boost = self.maxBoost},
+      {boost = self.boostMax},
       "linear",
       function() self.canBoost = true end
     )
   else
-    self.boost = math.min(self.boost + self.boostRegen*dt, self.maxBoost)
+    self.boost = math.min(self.boost + self.boostRegen*dt, self.boostMax)
   end
 
   --keep in bounds
@@ -137,4 +137,12 @@ end
 
 function Player:tick()
   self.area:addObject("TickEffect", self.cx, self.cy, self)
+end
+
+function Player:addResource(resource, amount)
+  if type(self[resource] == "number") and type(self[resource.."Max"]) == "number" then
+    self[resource] = mid(self[resource]+amount, self[resource.."Max"], 0)
+  else
+    print("error-Player:addResource => "..resource)
+  end
 end
