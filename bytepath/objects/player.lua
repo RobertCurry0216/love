@@ -6,7 +6,7 @@ function Player:new(area, x, y)
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
-  self.ship = player_ships.fighter
+  self.ship = player_ships.beater
 
   --movement vars
   self.dir = -math.pi/2
@@ -22,6 +22,10 @@ function Player:new(area, x, y)
   self.ammoMax = 100
   self.ammo = self.ammoMax
 
+  --weapons
+  self.gun = guns.Side
+  self.gunCoolDown = 0
+
   --boost stats
   self.boost = 100
   self.boostMax = 100
@@ -30,8 +34,6 @@ function Player:new(area, x, y)
   self.boostCoolDownPeriod = 2
   self.canBoost = true
 
-  --shooting
-  self.timer:every(0.24, function() self:shoot() end)
 
   --tick
   self.timer:every(5, function() self:tick() end)
@@ -87,6 +89,16 @@ function Player:update(dt)
     self.boost = math.min(self.boost + self.boostRegen*dt, self.boostMax)
   end
 
+  --shooting
+  self.gunCoolDown = self.gunCoolDown + dt
+  if self.gunCoolDown >= self.gun.coolDown then
+    self.gun.shoot(self, self.area)
+    self.gunCoolDown = 0
+    self.ammo = math.max(self.ammo - self.gun.ammoCost, 0)
+    if self.ammo == 0 then self.gun = guns.Neutral end
+    print(self.ammo)
+  end
+
   --keep in bounds
   if outsideScreen(self:getCenter()) then
     self:die()
@@ -124,13 +136,6 @@ function Player:die()
   camera:shake(6,60, 0.4)
   flash(4)
   explode(self.area, self.cx, self.cy)
-end
-
-function Player:shoot()
-  local u = self.size/2
-  local px, py = V.rotate(self.dir, self.ship.gun[1]*u, self.ship.gun[2]*u)
-  self.area:addObject("ShootEffect", self.cx+px, self.cy+py, self)
-  self.area:addObject("Projectile", self.cx+px, self.cy+py, self.dir)
 end
 
 function Player:tick()

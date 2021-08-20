@@ -29,7 +29,6 @@ function TextEffect:new(area, x, y, t, f, c)
 end
 
 function TextEffect:afterCreate()
-  print("new Text")
   if self.area.world then
     local _, _, cols, l = self.area.world:check(self)
     for _, col in ipairs(cols) do
@@ -38,7 +37,6 @@ function TextEffect:afterCreate()
         local dy = (self.cy-col.other.cy+self.h/2) * col.normal.y
 
         self:move(self.x+dx, self.y+dy)
-        print(tostring(dx)..":"..tostring(dy))
       end
     end
   end

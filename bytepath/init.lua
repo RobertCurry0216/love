@@ -28,7 +28,8 @@ require "rooms.stage"
 --game objects
 require "objects.player"
 require "objects.ships"
-require "objects.projectile"
+require "objects.guns"
+require "objects.projectiles.projectile"
 
 require "objects.pickups.pickup"
 require "objects.pickups.ammoPickup"
