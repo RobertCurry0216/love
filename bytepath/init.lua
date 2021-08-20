@@ -1,6 +1,3 @@
---globals
-require "globals"
-
 -- external libs
 Object = require "lib.classic.classic"
 Input = require "lib.boipushy.input"
@@ -12,6 +9,9 @@ Bump = require "lib.bump.bump"
 V = require "lib.hump.vector-light"
 Draft = require "lib.draft.draft"
 require "lib.utf8"
+
+--globals
+require "globals"
 
 --utils
 require "utils.utils"

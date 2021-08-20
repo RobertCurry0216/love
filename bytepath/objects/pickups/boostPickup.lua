@@ -38,5 +38,6 @@ function BoostPickup:onPickup(other)
   other.boost = math.min(other.boost+20, other.maxBoost)
   -- explode
   self.area:addObject("BoostEffect", self.cx, self.cy)
+  text(self.area, self.cx, self.cy, "+BOOST", {color=boost_color})
   self:destroy()
 end

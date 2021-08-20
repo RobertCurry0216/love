@@ -14,14 +14,28 @@ boost_color = {76/255, 195/255, 217/255}
 trail_color = skill_point_color
 dwindle_color = boost_color
 
+main_colors = {
+  default_color,
+  background_color,
+  ammo_color,
+  hp_color,
+  skill_point_color,
+  boost_color,
+  trail_color,
+  dwindle_color
+}
+
+negative_colors = {}
+for _,c in ipairs(main_colors) do
+  table.insert( negative_colors, {1-c[1],1-c[2],1-c[3]})
+end
+
+all_colors = M.append(main_colors, negative_colors)
+
 --fonts
 fonts = {}
-fonts["m5x7_8"] = love.graphics.newFont("fonts/m5x7.ttf", 8)
-fonts["m5x7_9"] = love.graphics.newFont("fonts/m5x7.ttf", 9)
-fonts["m5x7_10"] = love.graphics.newFont("fonts/m5x7.ttf", 10)
-fonts["m5x7_11"] = love.graphics.newFont("fonts/m5x7.ttf", 11)
-fonts["m5x7_12"] = love.graphics.newFont("fonts/m5x7.ttf", 12)
-fonts["m5x7_13"] = love.graphics.newFont("fonts/m5x7.ttf", 13)
-fonts["m5x7_14"] = love.graphics.newFont("fonts/m5x7.ttf", 14)
-fonts["m5x7_15"] = love.graphics.newFont("fonts/m5x7.ttf", 15)
-fonts["m5x7_16"] = love.graphics.newFont("fonts/m5x7.ttf", 16)
+for i=8,16 do
+  local font = love.graphics.newFont("fonts/m5x7.ttf", i)
+  font:setFilter("nearest", "nearest")
+  fonts["m5x7_"..i] = font
+end

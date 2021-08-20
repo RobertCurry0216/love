@@ -51,3 +51,10 @@ function explode(area, x, y, opts)
     area:addObject("ExplodeEffect", x, y, opts.size, opts.vel, opts.life, opts.color)
   end
 end
+
+function text(area, x, y, t, opts)
+  opts = opts or {}
+  local font = opts.font or fonts.m5x7_16
+  local color = opts.color or default_color
+  area:addObject("TextEffect", x, y, t, font, color)
+end
