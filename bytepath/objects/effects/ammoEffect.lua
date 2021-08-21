@@ -2,7 +2,7 @@ AmmoEffect = GameObject:extend()
 
 function AmmoEffect:new(area, x, y)
   AmmoEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.color = default_color
   self.size = 8

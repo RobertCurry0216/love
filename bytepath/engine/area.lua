@@ -12,7 +12,7 @@ function Area:update(dt)
     obj:update(dt)
     if obj.dead then
       table.remove( self.game_objects, i)
-      if self.world and obj.collidable then
+      if self.world and obj.collide then
         self.world:remove(obj)
       end
     end
@@ -38,7 +38,7 @@ end
 function Area:addObject(objType, ...)
   local obj = _G[objType](self, ...)
   table.insert(self.game_objects, obj)
-  if self.world and obj.collidable then
+  if self.world and obj.collide then
     local w = obj.w or obj.size
     local h = obj.h or obj.size
     self.world:add(obj, obj.x, obj.y, w, h)
@@ -52,4 +52,6 @@ end
 
 function Area:addCollisionWorld()
   self.world = Bump.newWorld()
+  self.world:addResponse("push", responsePush)
+  
 end

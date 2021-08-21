@@ -2,7 +2,7 @@ ShootEffect = GameObject:extend()
 
 function ShootEffect:new(area, x, y, shooter)
   ShootEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.shooter = shooter
   self.size = 8

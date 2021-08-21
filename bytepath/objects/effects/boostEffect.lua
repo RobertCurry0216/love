@@ -2,7 +2,7 @@ BoostEffect = GameObject:extend()
 
 function BoostEffect:new(area, x, y)
   BoostEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.color = default_color
   self.size = 14

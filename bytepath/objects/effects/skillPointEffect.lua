@@ -2,7 +2,7 @@ SkillPointEffect = GameObject:extend()
 
 function SkillPointEffect:new(area, x, y)
   SkillPointEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.color = default_color
   self.size = 18

@@ -2,6 +2,7 @@ TextEffect = GameObject:extend()
 
 function TextEffect:new(area, x, y, t, f, c, cen)
   TextEffect.super.new(self, area, x, y)
+  self.collide.canOverlap = false
   self.type = "TextEffect"
   self.vis = true
   self.depth = 80
@@ -33,7 +34,7 @@ function TextEffect:afterCreate()
   if self.area.world then
     local _, _, cols, l = self.area.world:check(self)
     for _, col in ipairs(cols) do
-      if col.other.type == "TextEffect" then
+      if not col.other.collide.canOverlap then
         local dx = (self.cx-col.other.cx+self.w/2) * col.normal.x
         local dy = (self.cy-col.other.cy+self.h/2) * col.normal.y
 

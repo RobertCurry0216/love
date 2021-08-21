@@ -2,6 +2,8 @@ Player = GameObject:extend()
 
 function Player:new(area, x, y)
   Player.super.new(self, area, x, y)
+  self.collide.canPush = true
+
   self.depth = 75
   self.size = 20
   self.cx, self.cy = self:getCenter()

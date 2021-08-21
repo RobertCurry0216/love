@@ -2,7 +2,7 @@ ExplodeEffect = GameObject:extend()
 
 function ExplodeEffect:new(area, x, y, size, vel, life, color)
   ExplodeEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.dir = random(0, 2*math.pi)
   self.size = size or random(2,3)

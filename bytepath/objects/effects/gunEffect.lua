@@ -2,7 +2,7 @@ GunEffect = GameObject:extend()
 
 function GunEffect:new(area, x, y, c)
   GunEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.color = c or default_color
   self.size = 20

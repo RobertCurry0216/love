@@ -20,7 +20,7 @@ function GunPickup:new(area, type)
   self.gun = guns[type]
   self.size = 18
   self.vel = random(20,40) * d
-  self.font = fonts.m5x7_12
+  self.font = fonts.m5x7_16
   self.ox = self.font:getWidth(self.gun.abbr)/2
   self.oy = self.font:getHeight()/2
 end

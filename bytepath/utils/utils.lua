@@ -43,3 +43,15 @@ function flash(frames)
     flash_frames = frames
   end
 end
+
+function createIrregularCircle(size, sides)
+  sides = sides or 8
+  local ang = math.pi / sides * 2
+  local points = {}
+  for i=1,sides do
+    local x, y = V.fromPolar(ang*i, random(size*0.75,size*1.25))
+    table.insert(points, x)
+    table.insert(points, y)
+  end
+  return points
+end

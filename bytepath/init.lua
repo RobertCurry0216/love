@@ -23,6 +23,9 @@ require "engine.room"
 require "engine.area"
 require "engine.gameObject"
 
+--custom responses
+require "responses.push"
+
 --rooms
 require "rooms.stage"
 
@@ -30,6 +33,7 @@ require "rooms.stage"
 require "objects.player"
 require "objects.ships"
 require "objects.guns"
+require "objects.enemies.rock"
 require "objects.projectiles.projectile"
 
 require "objects.pickups.pickup"

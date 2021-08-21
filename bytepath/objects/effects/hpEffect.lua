@@ -2,7 +2,7 @@ HPEffect = GameObject:extend()
 
 function HPEffect:new(area, x, y)
   HPEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   self.color = default_color
   self.size = 18

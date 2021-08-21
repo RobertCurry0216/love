@@ -2,7 +2,7 @@ TrailEffect = GameObject:extend()
 
 function TrailEffect:new(area, x, y, opts)
   TrailEffect.super.new(self, area, x, y)
-  self.collidable = false
+  self.collide = nil
   self.depth = 30
   opts = opts or {}
 

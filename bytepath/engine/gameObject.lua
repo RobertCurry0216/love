@@ -4,7 +4,12 @@ function GameObject:new(area, x, y)
   self.id = UUID()
   self.type = "GameObject"
   self.creationTime = love.timer.getTime()
-  self.collidable = true
+  self.collide = {
+    canGetShot = false,
+    canPickUp = false,
+    canPush = false,
+    canOverlap = true
+  }
   self.depth = 50
   self.area = area
   self.x = x
