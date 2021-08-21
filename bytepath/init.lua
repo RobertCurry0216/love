@@ -16,6 +16,7 @@ require "globals"
 --utils
 require "utils.utils"
 require "utils.math"
+require "utils.spawners"
 
 --engine
 require "engine.room"
@@ -36,6 +37,7 @@ require "objects.pickups.ammoPickup"
 require "objects.pickups.boostPickup"
 require "objects.pickups.skillPointPickup"
 require "objects.pickups.hpPickup"
+require "objects.pickups.gunPickup"
 
 --effects
 require "objects.effects.shootEffect"
@@ -48,3 +50,4 @@ require "objects.effects.boostEffect"
 require "objects.effects.hpEffect"
 require "objects.effects.skillPointEffect"
 require "objects.effects.textEffect"
+require "objects.effects.gunEffect"

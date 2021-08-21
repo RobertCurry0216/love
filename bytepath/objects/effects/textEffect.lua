@@ -1,6 +1,6 @@
 TextEffect = GameObject:extend()
 
-function TextEffect:new(area, x, y, t, f, c)
+function TextEffect:new(area, x, y, t, f, c, cen)
   TextEffect.super.new(self, area, x, y)
   self.type = "TextEffect"
   self.vis = true
@@ -8,6 +8,7 @@ function TextEffect:new(area, x, y, t, f, c)
   self.font = f
   self.chars = {}
   self.color = c
+  self.centered = cen
   for i=1,#t do table.insert(self.chars, t:utf8sub(i,i)) end
   self.h = self.font:getHeight()
   self.w = self.font:getWidth(t)
@@ -48,6 +49,7 @@ function TextEffect:draw()
 
   love.graphics.setFont(self.font)
   local w = 0
+  local xOff = self.centered and self.w/2 or 0
   local yOff = self.font:getHeight()/2
   for i, c in ipairs(self.chars) do
     --background
@@ -63,7 +65,7 @@ function TextEffect:draw()
     end
     --forground
     love.graphics.setColor(self.fgColors[i])
-    love.graphics.print(c, self.x+w, self.y, 0,1,1,0,yOff)
+    love.graphics.print(c, self.x+w, self.y, 0,1,1,xOff,yOff)
     w = w+self.font:getWidth(c)
   end
   love.graphics.setColor(default_color)

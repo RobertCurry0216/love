@@ -96,7 +96,6 @@ function Player:update(dt)
     self.gunCoolDown = 0
     self.ammo = math.max(self.ammo - self.gun.ammoCost, 0)
     if self.ammo == 0 then self.gun = guns.Neutral end
-    print(self.ammo)
   end
 
   --keep in bounds

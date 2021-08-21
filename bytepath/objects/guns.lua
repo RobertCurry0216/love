@@ -7,7 +7,8 @@ guns = {
     end,
     ammoCost = 0,
     coolDown = 0.24,
-    abbr = "N"
+    abbr = "N",
+    color = hp_color
   },
   Double = {
     shoot = function(shooter, area)
@@ -18,19 +19,21 @@ guns = {
     end,
     ammoCost = 2,
     coolDown = 0.32,
-    abbr = "2"
+    abbr = "2",
+    color = ammo_color
   },
   Triple = {
     shoot = function(shooter, area)
       local px, py = V.rotate(shooter.dir, shooter.size*1.5, 0)
       area:addObject("ShootEffect", shooter.cx+px, shooter.cy+py, shooter)
-      area:addObject("Projectile", shooter.cx+px, shooter.cy+py, shooter.dir+math.pi/12, boost_color)
-      area:addObject("Projectile", shooter.cx+px, shooter.cy+py, shooter.dir-math.pi/12, boost_color)
+      area:addObject("Projectile", shooter.cx+px, shooter.cy+py, shooter.dir+math.pi/8, boost_color)
+      area:addObject("Projectile", shooter.cx+px, shooter.cy+py, shooter.dir-math.pi/8, boost_color)
       area:addObject("Projectile", shooter.cx+px, shooter.cy+py, shooter.dir, boost_color)
     end,
     ammoCost = 3,
     coolDown = 0.32,
-    abbr = "3"
+    abbr = "3",
+    color = boost_color
   },
   Rapid = {
     shoot = function(shooter, area)
@@ -40,7 +43,8 @@ guns = {
     end,
     ammoCost = 1,
     coolDown = 0.12,
-    abbr = "R"
+    abbr = "R",
+    color = default_color
   },
   Spread = {
     shoot = function(shooter, area)
@@ -50,7 +54,8 @@ guns = {
     end,
     ammoCost = 1,
     coolDown = 0.16,
-    abbr = "RS"
+    abbr = "RS",
+    color = default_color
   },
   Back = {
     shoot = function(shooter, area)
@@ -63,7 +68,8 @@ guns = {
     end,
     ammoCost = 2,
     coolDown = 0.32,
-    abbr = "Ba"
+    abbr = "Ba",
+    color = skill_point_color
   },
   Side = {
     shoot = function(shooter, area)
@@ -79,6 +85,7 @@ guns = {
     end,
     ammoCost = 2,
     coolDown = 0.32,
-    abbr = "Si"
+    abbr = "Si",
+    color = boost_color
   }
 }

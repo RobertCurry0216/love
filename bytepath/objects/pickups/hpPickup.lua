@@ -1,7 +1,7 @@
 HPPickup = Pickup:extend()
 
 function HPPickup:new(area)
-  local d = M.sample({-1, 1})[1]
+  local d = table.random({-1, 1})
   local x, y = d==1 and -48 or gw+48, random(48, gh-48)
   HPPickup.super.new(self, area, x, y)
 

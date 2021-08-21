@@ -6,3 +6,7 @@ end
 function mid(a,b,c)
   return math.max(math.min(a,b),c)
 end
+
+function table.random(t)
+  return t[love.math.random(#t)]
+end
