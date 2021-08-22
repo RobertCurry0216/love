@@ -6,6 +6,7 @@ function Rock:new(area)
   Rock.super.new(self, area, x, y)
 
   self.collide.canBeShot = true
+  self.collide.canHurtPlayer = true
 
   self.size = 16 + random(-4,4)
   self.vel = random(20,40) * d
@@ -16,6 +17,7 @@ function Rock:new(area)
 
   -- stats
   self.hp = 100
+  self.damage = 30
 end
 
 function Rock:update(dt)
@@ -63,4 +65,8 @@ function Rock:hit(damage)
     self.color = default_color
     self.timer:after(0.2, function() self.color = hp_color end)
   end
+end
+
+function Rock:attack(other)
+  other:hit(self.damage)
 end

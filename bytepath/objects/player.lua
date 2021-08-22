@@ -27,7 +27,7 @@ function Player:new(area, x, y)
   self.flash = false
 
   --weapons
-  self.gun = guns.Side
+  self.gun = guns.Spread
   self.gunCoolDown = 0
 
   --boost stats
@@ -73,10 +73,15 @@ function Player:update(dt)
   --collisions
   for _, c in ipairs(_cols) do
     local other = c.other
-    local type = other.type
-    if type == "pickup" then
+    local collider = other.collide
+    if collider.canBePickedUp then
       other:onPickup(self)
     end
+
+    if collider.canHurtPlayer then
+      other:attack(self)
+    end
+
   end
 
   --boost
@@ -159,15 +164,15 @@ function Player:hit(damage)
   if self.invincible then return end
 
   damage = damage or 10
-  self:addResource(-damage)
+  self:addResource("hp", -damage)
   if self.hp == 0 then
     self:die()
   else
-    explode(self.area, self.cx, self.cy. {n=6, color=default_color})
+    explode(self.area, self.cx, self.cy, {n=6, color=default_color})
     if damage >= 30 then
       self.invincible = true
-      self.timer:after(2, function() self.invincible = false end)
-      self.timer:every(0.4, function() self.flash = not self.flash end, 5)
+      self.timer:after(2, function() self.invincible = false; self.flash = false end)
+      self.timer:every(0.4, function() self.flash = not self.flash end, 4)
       flash(3)
       slow(0.25, 0.5)
     end

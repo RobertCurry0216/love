@@ -8,7 +8,9 @@ function GameObject:new(area, x, y)
     canBeShot = false,
     canPickUp = false,
     canPush = false,
-    canOverlap = true
+    canOverlap = true,
+    canBePickedUp = false,
+    canHurtPlayer = false,
   }
   self.depth = 50
   self.area = area
