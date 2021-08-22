@@ -4,13 +4,21 @@ function responsePush(world, col, x,y,w,h, goalX, goalY, filter)
 
   local tch, move  = col.touch, col.move
   if move.x ~= 0 or move.y ~= 0 then
-    if col.normal.x < 0 then
-      goalX = 
-    elseif col.normal.x > 0 then
-    end
+    local diffX = col.item.cx - col.other.cx
+    local diffY = col.item.cy - col.other.cy
 
-    if col.normal.y < 0 then
-    elseif col.normal.y > 0 then
+    if math.abs(diffX) > math.abs(diffY) then
+      if diffX > 0 then
+        goalX = col.other.x + col.other.size
+      else
+        goalX = col.other.x - col.item.size
+      end
+    else
+      if diffY > 0 then
+        goalY = col.other.y + col.other.size
+      else
+        goalY = col.other.y - col.item.size
+      end
     end
   end
 

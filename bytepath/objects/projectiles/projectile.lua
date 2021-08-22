@@ -6,11 +6,21 @@ function Projectile:new(area, x, y, d, c)
   self.dir = d
   self.color = c or hp_color
   self.dx, self.dy = V.fromPolar(d,250)
+  self.damage = 100
 end
 
 function Projectile:update(dt)
   Projectile.super.update(self, dt)
-  self:move(self.x+self.dx*dt, self.y+self.dy*dt)
+  local cols, l = self:move(self.x+self.dx*dt, self.y+self.dy*dt)
+
+  if l > 0 then
+    for _, col in ipairs(cols) do
+      if col.other.collide.canBeShot and col.other.hit then
+        col.other:hit(self.damage)
+        self:die()
+      end
+    end
+  end
 
   if outsideScreen(self.cx, self.cy) then
     self:die()

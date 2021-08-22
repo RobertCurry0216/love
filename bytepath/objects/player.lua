@@ -23,6 +23,8 @@ function Player:new(area, x, y)
   self.hp = self.hpMax
   self.ammoMax = 100
   self.ammo = self.ammoMax
+  self.invincible = false
+  self.flash = false
 
   --weapons
   self.gun = guns.Side
@@ -107,7 +109,9 @@ function Player:update(dt)
 end
 
 function Player:draw()
-  --love.graphics.circle("line", self.cx, self.cy, self.size*0.7)
+  -- draw nothing if flashing
+  if self.flash then return end
+
   local u = self.size / 2
   pushRotate(self.cx, self.cy, self.dir)
   for _, poly in ipairs(self.ship.polygons) do
@@ -148,5 +152,24 @@ function Player:addResource(resource, amount)
     self[resource] = mid(self[resource]+amount, self[resource.."Max"], 0)
   else
     print("error-Player:addResource => "..resource)
+  end
+end
+
+function Player:hit(damage)
+  if self.invincible then return end
+
+  damage = damage or 10
+  self:addResource(-damage)
+  if self.hp == 0 then
+    self:die()
+  else
+    explode(self.area, self.cx, self.cy. {n=6, color=default_color})
+    if damage >= 30 then
+      self.invincible = true
+      self.timer:after(2, function() self.invincible = false end)
+      self.timer:every(0.4, function() self.flash = not self.flash end, 5)
+      flash(3)
+      slow(0.25, 0.5)
+    end
   end
 end
