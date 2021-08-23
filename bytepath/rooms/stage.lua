@@ -6,7 +6,7 @@ function Stage:new()
   self.area:addCollisionWorld()
   self.player = self.area:addObject("Player", gw/2, gh/2)
 
-  timer:every(1, function() self.area:addObject("Rock") end)
+  timer:every(1, function() self.area:addObject("Shooter") end)
 end
 
 function Stage:update(dt)

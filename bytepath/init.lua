@@ -34,6 +34,7 @@ require "objects.player"
 require "objects.ships"
 require "objects.guns"
 require "objects.enemies.rock"
+require "objects.enemies.shooter"
 require "objects.projectiles.projectile"
 
 require "objects.pickups.pickup"
