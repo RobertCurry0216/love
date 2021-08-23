@@ -5,7 +5,6 @@ function Rock:new(area)
   local x, y = d==1 and -48 or gw+48, random(48, gh-48)
   Rock.super.new(self, area, x, y)
 
-  self.collide.canBeShot = true
   self.collide.canHurtPlayer = true
 
   self.size = 16 + random(-4,4)
@@ -21,10 +20,18 @@ function Rock:new(area)
 end
 
 function Rock:update(dt)
-  Rock.super.update(self,dt)
+  Rock.super.update(self, dt)
   self.ang = self.ang + self.spin*dt
 
-  self:move(self.x+self.vel*dt, self.y)
+  local cols, l = self:move(self.x+self.vel*dt, self.y)
+
+  if l > 0 then
+    for _, col in ipairs(cols) do
+      if col.other.collide.canHurtEnemy then
+        col.other:attack(self)
+      end
+    end
+  end
 
   -- check off screen
   if outsideScreen(self.x, self.y, 50) then

@@ -2,6 +2,7 @@ Projectile = GameObject:extend()
 
 function Projectile:new(area, x, y, d, c)
   Projectile.super.new(self,area,x-2.5,y-2.5)
+  self.collide.canHurtEnemy = true
   self.size = 5
   self.dir = d
   self.color = c or hp_color
@@ -12,19 +13,15 @@ end
 function Projectile:update(dt)
   Projectile.super.update(self, dt)
   local cols, l = self:move(self.x+self.dx*dt, self.y+self.dy*dt)
-
-  if l > 0 then
-    for _, col in ipairs(cols) do
-      if col.other.collide.canBeShot and col.other.hit then
-        col.other:hit(self.damage)
-        self:die()
-      end
-    end
-  end
-
+  
   if outsideScreen(self.cx, self.cy) then
     self:die()
   end 
+end
+
+function Projectile:attack(other)
+  other:hit(self.damage)
+  self:die()
 end
 
 function Projectile:draw()

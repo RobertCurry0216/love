@@ -13,16 +13,57 @@ function Shooter:new(area)
   self.ang = d == 1 and 0 or math.pi
   self.outline = {-0.6,0, 0,-0.6, 1.5,0, 0,0.6}
   self.color = hp_color
+  self.tipX = self.size*d*2
 
   -- stats
   self.hp = 100
   self.damage = 30
+
+  -- shooting
+  self.timer:every(
+    random(3,5),
+    function()
+      local handle = self.timer:every(0.05, function()
+        local d = random(0, math.pi*2)
+        local x, y = V.fromPolar(d,15)
+        self.area:addObject(
+          "ExplodeEffect",
+          self.cx + self.tipX - x,
+          self.cy - y,
+          {dir=d, color=hp_color}
+        )
+      end)
+      self.timer:after(
+        1,
+        function()
+          if current_room.player then
+            self.area:addObject(
+              "EnemyProjectile",
+              self.cx + self.tipX,
+              self.cy,
+              current_room.player.cx,
+              current_room.player.cy
+            )
+          end
+          self.timer:cancel(handle)
+        end
+      )
+    end
+  )
 end
 
 function Shooter:update(dt)
   Shooter.super.update(self,dt)
 
-  self:move(self.x+self.vel*dt, self.y)
+  local cols, l = self:move(self.x+self.vel*dt, self.y)
+
+  if l > 0 then
+    for _, col in ipairs(cols) do
+      if col.other.collide.canHurtEnemy then
+        col.other:attack(self)
+      end
+    end
+  end
 
   -- check off screen
   if outsideScreen(self.x, self.y, 50) then
@@ -52,7 +93,7 @@ end
 
 function Shooter:die()
   self:destroy()
-  self.area:addObject( "ProjectileDeathEffect",self.cx, self.cy, self.size*1.5, hp_color)
+  self.area:addObject("ProjectileDeathEffect",self.cx, self.cy, self.size*1.5, hp_color)
   self.area:addObject("AmmoPickup", self.cx, self.cy)
 end
 

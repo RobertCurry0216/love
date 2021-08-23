@@ -5,11 +5,11 @@ function GameObject:new(area, x, y)
   self.type = "GameObject"
   self.creationTime = love.timer.getTime()
   self.collide = {
-    canBeShot = false,
     canPickUp = false,
     canPush = false,
     canOverlap = true,
     canBePickedUp = false,
+    canHurtEnemy = false,
     canHurtPlayer = false,
   }
   self.depth = 50

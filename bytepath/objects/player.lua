@@ -160,15 +160,15 @@ function Player:addResource(resource, amount)
   end
 end
 
-function Player:hit(damage)
+function Player:hit(damage, opts)
   if self.invincible then return end
-
+  opts = opts or {}
   damage = damage or 10
   self:addResource("hp", -damage)
   if self.hp == 0 then
     self:die()
   else
-    explode(self.area, self.cx, self.cy, {n=6, color=default_color})
+    explode(self.area, self.cx, self.cy, {n=6, color= opts.color or default_color})
     if damage >= 30 then
       self.invincible = true
       self.timer:after(2, function() self.invincible = false; self.flash = false end)

@@ -1,16 +1,16 @@
 ExplodeEffect = GameObject:extend()
 
-function ExplodeEffect:new(area, x, y, size, vel, life, color)
+function ExplodeEffect:new(area, x, y, opts)
   ExplodeEffect.super.new(self, area, x, y)
   self.collide = nil
   self.depth = 30
-  self.dir = random(0, 2*math.pi)
-  self.size = size or random(2,3)
-  self.vel = vel or random(75, 150)
+  self.dir = opts.dir or random(0, 2*math.pi)
+  self.size = opts.size or random(2,3)
+  self.vel = opts.vel or random(75, 150)
   self.lineWidth = 2
-  self.color = color or default_color
+  self.color = opts.color or default_color
   self.timer:tween(
-    life or random(0.3, 0.5),
+    opts.life or random(0.3, 0.5),
     self,
     {size=0, vel=0, lineWidth=0}, 
     "linear",

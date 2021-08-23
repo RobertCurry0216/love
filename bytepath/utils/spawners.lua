@@ -2,7 +2,7 @@ function explode(area, x, y, opts)
   opts = opts or {}
   local n = opts.n or 10
   for i=1,random(n-2,n+2) do
-    area:addObject("ExplodeEffect", x, y, opts.size, opts.vel, opts.life, opts.color)
+    area:addObject("ExplodeEffect", x, y, opts)
   end
 end
 
