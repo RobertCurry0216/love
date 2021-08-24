@@ -30,6 +30,7 @@ require "responses.push"
 require "rooms.stage"
 
 --game objects
+require "objects.director"
 require "objects.player"
 require "objects.ships"
 require "objects.guns"

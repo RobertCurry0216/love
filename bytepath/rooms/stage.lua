@@ -5,6 +5,7 @@ function Stage:new()
   self.area = Area(self)
   self.area:addCollisionWorld()
   self.player = self.area:addObject("Player", gw/2, gh/2)
+  self.director = Director(self)
 
   timer:every(1, function() self.area:addObject("Shooter") end)
 end
@@ -12,6 +13,7 @@ end
 function Stage:update(dt)
   camera.smoother = Camera.smooth.damped(5)
   camera:lockPosition(dt, gw/2, gh/2)
+  self.director:update(dt)
   self.area:update(dt)
 end
 
