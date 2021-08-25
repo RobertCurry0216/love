@@ -48,4 +48,6 @@ function BoostPickup:onPickup(other)
     {color=boost_color}
 )
   self:destroy()
+
+  addScore(150)
 end

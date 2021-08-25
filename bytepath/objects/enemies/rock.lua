@@ -63,6 +63,8 @@ function Rock:die()
   self:destroy()
   self.area:addObject( "ProjectileDeathEffect",self.cx, self.cy, self.size*1.5, hp_color)
   self.area:addObject("AmmoPickup", self.cx, self.cy)
+
+  addScore(100)
 end
 
 function Rock:hit(damage)

@@ -55,3 +55,16 @@ function createIrregularCircle(size, sides)
   end
   return points
 end
+
+function padLeft(t, w, f)
+  if type(t) ~= string then
+    t = tostring(t)
+  end
+  f = f or " "
+  local filled = ""
+  for i=1,w do
+    filled = filled..f
+  end
+
+  return filled:utf8sub(1, #filled-#t)..t
+end

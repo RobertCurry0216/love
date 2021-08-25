@@ -21,7 +21,8 @@ function Director:new(stage)
     Rock = 1,
     Shooter = 2
   }
-
+  
+  -- set pickups spawns
   self.enemySpawnGenerators = {
     chanceGenerator({"Rock", 1}),
     chanceGenerator({"Rock", 8}, {"Shooter", 4}),
@@ -30,6 +31,22 @@ function Director:new(stage)
   }
 
   self:setEnemySpawnsForThisRound()
+  
+  local pickupSpawnGenerator = chanceGenerator(
+    {'BoostPickup', 28}, {'HPPickup', 14}, {'SkillPointPickup', 58}
+  )
+  self.timer:every(16, function() self.stage.area:addObject(pickupSpawnGenerator()) end)
+
+  -- set gun spawns
+  local gunSpawnGenerator = chanceGenerator(
+    {"Double", 3},
+    {"Triple", 3},
+    {"Rapid", 3},
+    {"Spread", 3},
+    {"Back", 3},
+    {"Side", 3}
+  )
+  self.timer:every(30, function() self.stage.area:addObject("GunPickup", gunSpawnGenerator()) end)
 end
 
 function Director:update(dt)
