@@ -6,8 +6,6 @@ function Stage:new()
   self.area:addCollisionWorld()
   self.player = self.area:addObject("Player", gw/2, gh/2)
   self.director = Director(self)
-
-  timer:every(1, function() self.area:addObject("Shooter") end)
 end
 
 function Stage:update(dt)
