@@ -55,3 +55,34 @@ function createIrregularCircle(size, sides)
   end
   return points
 end
+
+function padLeft(t, w, f)
+  if type(t) ~= string then
+    t = tostring(t)
+  end
+  f = f or " "
+  local filled = ""
+  for i=1,w do
+    filled = filled..f
+  end
+
+  return filled:utf8sub(1, #filled-#t)..t
+end
+
+function drawUIBar(cx, cy, t1, t2, v, c)
+  local font = fonts.m5x7_16
+  local yOff = font:getHeight()/2
+
+  local w, h = 75, 6
+  local x, y = cx - w/2, cy - h/2 
+
+  love.graphics.setFont(font)
+  love.graphics.setColor(c)
+
+  love.graphics.print(t1, cx, cy-14, 0, 1, 1, font:getWidth(t1)/2, yOff)
+  love.graphics.rectangle("line", x, y, w, h)
+  love.graphics.rectangle("fill", x, y, w*v, h)
+  love.graphics.print(t2, cx, cy+12, 0, 1, 1, font:getWidth(t2)/2, yOff)
+
+  love.graphics.setColor(1,1,1)
+end

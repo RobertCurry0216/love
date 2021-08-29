@@ -46,7 +46,6 @@ function GunPickup:draw()
 end
 
 function GunPickup:onPickup(other)
-  print(self.type)
   GunPickup.super.onPickup(self, other)
   -- give gun
   other.gun = self.gun
@@ -61,4 +60,6 @@ function GunPickup:onPickup(other)
     {color=self.gun.color, centered=true}
   )
   self:destroy()
+
+  addScore(500)
 end

@@ -43,4 +43,6 @@ function AmmoPickup:onPickup(other)
   self.area:addObject("AmmoEffect", self.cx, self.cy)
   explode(self.area, self.cx, self.cy, {n=8, color=ammo_color})
   self:destroy()
+
+  addScore(50)
 end

@@ -95,6 +95,8 @@ function Shooter:die()
   self:destroy()
   self.area:addObject("ProjectileDeathEffect",self.cx, self.cy, self.size*1.5, hp_color)
   self.area:addObject("AmmoPickup", self.cx, self.cy)
+
+  addScore(150)
 end
 
 function Shooter:hit(damage)

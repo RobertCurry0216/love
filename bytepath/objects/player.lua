@@ -8,7 +8,7 @@ function Player:new(area, x, y)
   self.size = 20
   self.cx, self.cy = self:getCenter()
 
-  self.ship = player_ships.beater
+  self.ship = player_ships.fighter
 
   --movement vars
   self.dir = -math.pi/2
@@ -27,7 +27,7 @@ function Player:new(area, x, y)
   self.flash = false
 
   --weapons
-  self.gun = guns.Spread
+  self.gun = guns.Neutral
   self.gunCoolDown = 0
 
   --boost stats
@@ -146,6 +146,8 @@ function Player:die()
   camera:shake(6,60, 0.4)
   flash(4)
   explode(self.area, self.cx, self.cy)
+
+  current_room:finish()
 end
 
 function Player:tick()

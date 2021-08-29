@@ -48,4 +48,6 @@ function SkillPointPickup:onPickup(other)
     {color=skill_point_color}
 )
   self:destroy()
+
+  addScore(250)
 end

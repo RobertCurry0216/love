@@ -10,3 +10,26 @@ end
 function table.random(t)
   return t[love.math.random(#t)]
 end
+
+local function createChanceList(...)
+  local chances = {}
+  for _, v in ipairs({...}) do
+    local value, n = v[1], v[2]
+    for i=1,n do
+      table.insert( chances, value )
+    end
+  end
+  return M.shuffle(chances, love.math.random())
+end
+
+function chanceGenerator(...)
+  local chanceList = {...}
+  local chances = {}
+  local function next()
+    if #chances == 0 then
+      chances = createChanceList(unpack(chanceList))
+    end
+    return M.pop(chances)
+  end 
+  return next
+end
