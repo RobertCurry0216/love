@@ -1,4 +1,4 @@
-HyperCircle = Circle:extend()
+local HyperCircle = Circle:extend()
 
 local function bounce(self)
   if self.r2 - 5 > self.rSmall then
@@ -33,3 +33,5 @@ function HyperCircle:draw()
   HyperCircle.super.draw(self)
   love.graphics.circle("line", self.x, self.y, self.r2)
 end
+
+return HyperCircle

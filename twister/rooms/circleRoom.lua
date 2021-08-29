@@ -1,4 +1,4 @@
-CircleRoom = Room:extend()
+local CircleRoom = Room:extend()
 
 function CircleRoom:new()
   self.area = Area(self)
@@ -12,3 +12,5 @@ end
 function CircleRoom:draw()
   self.area:draw()
 end
+
+return CircleRoom

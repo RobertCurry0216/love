@@ -1,11 +1,8 @@
 GameObject = Object:extend()
 
-function GameObject:new(area, x, y)
+function GameObject:new(area)
   self.area = area
-  self.x = x
-  self.y = y
   self.id = UUID()
-  self.dead = false
   self.timer = Timer()
 end
 

@@ -1,4 +1,4 @@
-Circle = GameObject:extend()
+local Circle = GameObject:extend()
 
 function Circle:new(area, x, y, r)
   Circle.super.new(self, area, x, y)
@@ -12,3 +12,5 @@ end
 function Circle:draw()
   love.graphics.circle("fill",self.x, self.y, self.r)
 end
+
+return Circle

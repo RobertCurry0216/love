@@ -3,6 +3,7 @@ Object = require "lib.classic.classic"
 Input = require "lib.boipushy.input"
 Timer = require "lib.hump.timer"
 M = require "lib.Moses.moses"
+Vector = require "lib.hump.vector"
 
 --utils
 require "utils.utils"
@@ -13,10 +14,7 @@ require "engine.area"
 require "engine.gameObject"
 
 --rooms
-require "rooms.circleRoom"
-require "rooms.rectangleRoom"
-require "rooms.polygonRoom"
+require "rooms.testRoom"
 
 --classes
-require "objects.circle"
-require "objects.hyperCircle"
+require "objects.Loop"
