@@ -38,6 +38,18 @@ function Player:new(area, x, y)
   self.boostCoolDownPeriod = 2
   self.canBoost = true
 
+  --multipliers
+  self.hpMulti = 1
+  self.hpFlat = 0
+
+  self.boostMulti = 1
+  self.boostFlat = 0
+
+  self.ammoMulti = 1
+  self.ammoFlat = 0
+  self.ammoGain = 5
+
+  self:setStats()
 
   --tick
   self.timer:every(5, function() self:tick() end)
@@ -179,4 +191,15 @@ function Player:hit(damage, opts)
       slow(0.25, 0.5)
     end
   end
+end
+
+function Player:setStats()
+  self.hpMax = (self.hpMax + self.hpFlat) * self.hpMulti
+  self.hp = self.hpMax
+
+  self.boostMax = (self.boostMax + self.boostFlat) * self.boostMulti
+  self.boost = self.boostMax
+
+  self.ammoMax = (self.ammoMax + self.ammoFlat) * self.ammoMulti
+  self.ammo = self.ammoMax
 end
