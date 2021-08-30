@@ -6,7 +6,9 @@ function TrailEffect:new(area, x, y, opts)
   self.depth = 30
   opts = opts or {}
 
-  self.r = opts.r or random(4,6)
+  local size = opts.size or 5
+
+  self.r = random(size-1,size+1)
   self.color = opts.color or trail_color
   self.timer:tween(
     opts.life or random(0.2, 0.4),

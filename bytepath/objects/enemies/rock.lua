@@ -5,6 +5,7 @@ function Rock:new(area)
   local x, y = d==1 and -48 or gw+48, random(48, gh-48)
   Rock.super.new(self, area, x, y)
 
+  self.type = "enemy"
   self.collide.canHurtPlayer = true
 
   self.size = 16 + random(-4,4)

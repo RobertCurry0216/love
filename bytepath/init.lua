@@ -37,6 +37,7 @@ require "objects.guns"
 require "objects.enemies.rock"
 require "objects.enemies.shooter"
 require "objects.projectiles.projectile"
+require "objects.projectiles.homingProjectile"
 require "objects.projectiles.enemyProjectile"
 
 require "objects.pickups.pickup"

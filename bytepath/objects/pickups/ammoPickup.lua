@@ -16,10 +16,8 @@ function AmmoPickup:update(dt)
   -- move towards player
   if current_room and current_room.player then
     local target = current_room.player
-    local steer = V.angleTo(target.cx - self.cx, target.cy - self.cy) - self.dir
-    if steer > math.pi then steer = steer - math.pi*2 end
-    if steer < -math.pi then steer = steer + math.pi*2 end
-    self.dir = self.dir + steer*0.1
+    
+    self.dir = steer(self.x, self.y, target.x, target.y, self.dir, 0.1)
     local x, y = V.fromPolar(self.dir, self.vel*dt)
     self:move(self.x+x, self.y+y)
   end

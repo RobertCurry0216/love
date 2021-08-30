@@ -7,7 +7,8 @@ local gunTypes = {
   "Rapid",
   "Spread",
   "Back",
-  "Side"
+  "Side",
+  "Homing"
 }
 
 function GunPickup:new(area, type)

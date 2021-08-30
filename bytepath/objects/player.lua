@@ -5,7 +5,7 @@ function Player:new(area, x, y)
   self.collide.canPush = true
 
   self.depth = 75
-  self.size = 20
+  self.size = 16
   self.cx, self.cy = self:getCenter()
 
   self.ship = player_ships.fighter
@@ -27,7 +27,7 @@ function Player:new(area, x, y)
   self.flash = false
 
   --weapons
-  self.gun = guns.Neutral
+  self.gun = guns.Homing
   self.gunCoolDown = 0
 
   --boost stats
@@ -39,15 +39,15 @@ function Player:new(area, x, y)
   self.canBoost = true
 
   --multipliers
-  self.hpMulti = 1
+  self.hpMulti = 1.5
   self.hpFlat = 0
 
-  self.boostMulti = 1
+  self.boostMulti = 1.6
   self.boostFlat = 0
 
-  self.ammoMulti = 1
+  self.ammoMulti = 2
   self.ammoFlat = 0
-  self.ammoGain = 5
+  self.ammoGain = 50
 
   self:setStats()
 

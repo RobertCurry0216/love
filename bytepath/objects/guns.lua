@@ -87,5 +87,17 @@ guns = {
     coolDown = 0.32,
     abbr = "Si",
     color = boost_color
+  },
+  Homing = {
+    shoot = function(shooter, area)
+      local px, py = V.rotate(shooter.dir, shooter.size*1.5, 0)
+      area:addObject("ShootEffect", shooter.cx+px, shooter.cy+py, shooter)
+      area:addObject("HomingProjectile", shooter.cx+px, shooter.cy+py, shooter.dir, skill_point_color)
+      
+    end,
+    ammoCost = 4,
+    coolDown = 0.56,
+    abbr = "H",
+    color = skill_point_color
   }
 }

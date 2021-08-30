@@ -33,3 +33,15 @@ function chanceGenerator(...)
   end 
   return next
 end
+
+
+function steer(x, y, tx, ty, dir, turnSpeed)
+  local twoPi = math.pi*2
+  turnSpeed = turnSpeed or 0.1
+  dir = dir % twoPi
+  local steer = V.angleTo(tx - x, ty - y) - dir
+  if steer > math.pi then steer = steer - twoPi end
+  if steer < -math.pi then steer = steer + twoPi end
+
+  return dir + steer * turnSpeed
+end

@@ -27,7 +27,10 @@ function Stage:draw()
     -- score
     love.graphics.setColor(skill_point_color)
     love.graphics.setFont(fonts.m5x7_16)
-    love.graphics.print(padLeft(self.score, 8, "0"),10,10)
+    love.graphics.print("0SP",10,10)
+
+    love.graphics.setColor(default_color)
+    love.graphics.print(padLeft(self.score, 8, "0"),gw - 60,10)
 
     local p = current_room.player
     local d = self.director

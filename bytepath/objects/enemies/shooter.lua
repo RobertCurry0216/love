@@ -5,6 +5,7 @@ function Shooter:new(area)
   local x, y = d==1 and -48 or gw+48, random(48, gh-48)
   Shooter.super.new(self, area, x, y)
 
+  self.type = "enemy"
   self.collide.canBeShot = true
   self.collide.canHurtPlayer = true
 
