@@ -39,17 +39,26 @@ function Player:new(area, x, y)
   self.canBoost = true
 
   --multipliers
-  self.hpMulti = 1.5
+  self.hpMulti = 1
   self.hpFlat = 0
 
-  self.boostMulti = 1.6
+  self.boostMulti = 1
   self.boostFlat = 0
 
-  self.ammoMulti = 2
+  self.ammoMulti = 1
   self.ammoFlat = 0
-  self.ammoGain = 50
+  self.ammoGain = 5
 
   self:setStats()
+
+  --chances
+  self.chances = {
+    spawnHomingOnAmmoPickup = 5,
+    regenHpOnAmmoPickup = 5,
+    regenHpOnSpPickup = 5,
+  }
+
+  self:setChances()
 
   --tick
   self.timer:every(5, function() self:tick() end)
@@ -174,6 +183,20 @@ function Player:addResource(resource, amount)
   end
 end
 
+function Player:addAmmo()
+  self:addResource("ammo", self.ammoGain)
+
+  if self:spawnHomingOnAmmoPickup() then
+    self.area:addObject("HomingProjectile", self.cx, self.cy, self.dir, skill_point_color)
+    text(self.area, self.cx, self.cy, "Homing Projectile!")
+  end
+
+  if self:regenHpOnAmmoPickup() then
+    self:addResource("hp", 25)
+    text(self.area, self.cx, self.cy, "HP Regen!", {color=hp_color})
+  end
+end
+
 function Player:hit(damage, opts)
   if self.invincible then return end
   opts = opts or {}
@@ -202,4 +225,10 @@ function Player:setStats()
 
   self.ammoMax = (self.ammoMax + self.ammoFlat) * self.ammoMulti
   self.ammo = self.ammoMax
+end
+
+function Player:setChances()
+  for k, v in pairs(self.chances) do
+    self[k] = chanceGenerator({true, math.ceil(v)}, {false, 100-math.ceil(v)})
+  end
 end

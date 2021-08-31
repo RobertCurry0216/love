@@ -38,6 +38,11 @@ function SkillPointPickup:onPickup(other)
   SkillPointPickup.super.onPickup(self, other)
   --TODO: add skill point here
 
+  if other:regenHpOnSpPickup() then
+    other:addResource("hp", 25)
+    text(other.area, other.cx, other.cy, "HP Regen!", {color=hp_color})
+  end
+
   -- explode
   self.area:addObject("SkillPointEffect", self.cx, self.cy)
   text(

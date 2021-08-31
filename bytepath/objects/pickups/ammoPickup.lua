@@ -34,7 +34,7 @@ end
 function AmmoPickup:onPickup(other)
   AmmoPickup.super.onPickup(self, other)
   -- give ammo
-  other:addResource("ammo", other.ammoGain)
+  other:addAmmo()
   -- explode
   self.area:addObject("AmmoEffect", self.cx, self.cy)
   explode(self.area, self.cx, self.cy, {n=8, color=ammo_color})
