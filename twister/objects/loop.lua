@@ -42,6 +42,32 @@ local function getPointsAndRadius(segments)
   return points, r
 end
 
+local function drawSegment(w, s, e)
+  local a = math.atan2(e.x-s.x, e.y-s.y)
+  local off = Vector.fromPolar(a, w/2)
+
+  p1 = s + off
+  p2 = e - off
+
+  love.graphics.setLineWidth(w)
+  love.graphics.setColor(1,1,1)
+  love.graphics.circle("fill", p1.x, p1.y, w/2)
+  love.graphics.circle("fill", p2.x, p2.y, w/2)
+  love.graphics.line(p1.x, p1.y, p2.x, p2.y)
+
+  w = w-6
+  love.graphics.setLineWidth(w)
+  love.graphics.setColor(0,0,0)
+  love.graphics.circle("fill", p1.x, p1.y, w/2)
+  love.graphics.circle("fill", p2.x, p2.y, w/2)
+  love.graphics.line(p1.x, p1.y, p2.x, p2.y)
+
+  love.graphics.setLineWidth(1)
+  love.graphics.setColor(1,1,1)
+
+  love.graphics.line(s.x, s.y, e.x, e.y)
+
+end
 
 function Loop:new(...)
   Loop.super.new(self, nil)
@@ -63,10 +89,10 @@ function Loop:draw(cx, cy)
   for _, point in ipairs(self.points) do
     p1 = point + c
     if p2 then
-      love.graphics.line(p1.x, p1.y, p2.x, p2.y)
+      drawSegment(32, p1, p2)
     end
     p2 = p1
   end
   p2 = self.points[1] + c
-  love.graphics.line(p1.x, p1.y, p2.x, p2.y)
+  drawSegment(32, p1, p2)
 end

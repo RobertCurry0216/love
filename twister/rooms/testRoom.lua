@@ -2,10 +2,7 @@ TestRoom = Room:extend()
 
 function TestRoom:new()
   self.loop = Loop(
-    love.math.random(50, 400),
-    love.math.random(50, 400),
-    love.math.random(50, 400),
-    love.math.random(50, 400)
+    150,150,150,250
   )
 end
 
