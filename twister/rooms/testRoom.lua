@@ -2,7 +2,13 @@ TestRoom = Room:extend()
 
 function TestRoom:new()
   self.loop = Loop(
-    150,150,150,250
+    50,
+    love.math.random(32,160),
+    love.math.random(32,160),
+    love.math.random(32,160),
+    love.math.random(32,160),
+    love.math.random(32,160),
+    50
   )
 end
 
@@ -11,5 +17,5 @@ function TestRoom:update(dt)
 end
 
 function TestRoom:draw()
-  self.loop:draw(400, 300)
+  self.loop:draw(gw/2, gh/2)
 end
