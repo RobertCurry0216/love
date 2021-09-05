@@ -1,0 +1,1 @@
+twoPi = math.pi * 2

@@ -7,6 +7,7 @@ Vector = require "lib.hump.vector"
 
 --utils
 require "utils.utils"
+require "utils.math"
 
 --engine
 require "engine.room"
@@ -18,3 +19,7 @@ require "rooms.testRoom"
 
 --classes
 require "objects.Loop"
+require "objects.segment"
+
+--globals
+require "globals"

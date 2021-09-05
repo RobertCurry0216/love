@@ -1,6 +1,9 @@
 require "init"
 
 function love.load()
+  love.graphics.setDefaultFilter("nearest")
+  love.graphics.setLineStyle("rough")
+
   input = Input()
   timer = Timer.new()
   gotoRoom("TestRoom")
